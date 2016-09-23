@@ -18,7 +18,6 @@
 
 # Config
 config/database.yml
-config/secrets.yml
 
 # Foreman
 procfile
