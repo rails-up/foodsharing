@@ -1,0 +1,13 @@
+header.navbar-fixed role="banner"
+  nav.green role="navigation"
+    .nav-wrapper.container
+      a.brand-logo#logo-container href="/" FS
+
+      ul.right.hide-on-med-and-down
+        = render "layouts/navlink"
+
+      ul.side-nav id="nav-mobile"
+        = render "layouts/navlink"
+
+      a.button-collapse href="#" data-activates="nav-mobile" 
+        i.material-icons menu

@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    = render "layouts/head"
+  body
+    = render "layouts/navbar"
+    = render "layouts/notice"
+    main role="main"
+      article 
+        = yield
+    = render "layouts/footer"
