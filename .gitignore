@@ -21,3 +21,6 @@ config/database.yml
 
 # Foreman
 procfile
+
+# Rubocop
+rubocop_pre_commit_hook.rb
