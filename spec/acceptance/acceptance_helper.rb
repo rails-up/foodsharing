@@ -11,7 +11,7 @@ RSpec.configure do |config|
     Capybara::Poltergeist::Driver.new(app, js_errors: false)
   end
 
-  config.include AcceptanceMacros, type: :feature  
+  config.include AcceptanceMacros, type: :feature
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
