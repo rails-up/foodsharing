@@ -1,0 +1,12 @@
+h3 Предложения
+
+table.striped
+  thead
+    tr
+      th Заголовок
+      th
+      th
+      th
+  tbody
+    tr
+      = render partial: 'donations', collection: @donations, as: 'donation'
