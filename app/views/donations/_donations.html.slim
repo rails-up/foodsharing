@@ -1,4 +1,4 @@
-td = donation.title
-td = link_to "Показать", donation_path(donation)
-td = link_to "Изменить", edit_donation_path(donation)
-td = link_to "Удалить", donation_path(donation), data: { confirm: "Вы уверены?" }, method: :delete
+.divider
+.section
+  h5 = link_to donation.title, donation_path(donation)
+  p = donation.title

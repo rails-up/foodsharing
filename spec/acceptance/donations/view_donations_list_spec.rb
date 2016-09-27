@@ -1,7 +1,7 @@
 require_relative '../acceptance_helper'
 
 feature 'View Donations list', %q(
-  The user can view a list of donations
+  The any user can view a list of donations
 ) do
   given!(:donations) { create_list(:donation, 3) }
 

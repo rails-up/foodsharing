@@ -1,12 +1,3 @@
-h3 Предложения
-
-table.striped
-  thead
-    tr
-      th Заголовок
-      th
-      th
-      th
-  tbody
-    tr
-      = render partial: 'donations', collection: @donations, as: 'donation'
+h3 Перечень предложений
+p = link_to "Добавить предложение", new_donation_path, class: 'btn'
+= render partial: 'donations', collection: @donations, as: 'donation'

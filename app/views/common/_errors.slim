@@ -1,0 +1,7 @@
+- if resource.errors.any?
+  .hide
+    #error_explanation
+      p = "#{pluralize(resource.errors.count, "error")}:"
+      ul
+        - resource.errors.full_messages.each do |message|
+          li = message

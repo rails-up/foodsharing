@@ -1,0 +1,17 @@
+.row
+  .col
+    = link_to "Назад к списку", donations_path, class: 'btn' 
+
+= form_for @donation do |f|
+  = render 'common/errors', resource: @donation
+  .row
+    .field.input-field.col
+      = f.label :title, "Заголовок", class: 'active'
+      = f.text_field :title , placeholder: 'Заголовок предложения'
+  .row
+    .field.input-field.col
+      = f.label :description, "Описание", class: 'active'
+      = f.text_area :description , placeholder: 'Описание предложения', class: 'materialize-textarea'
+  .row  
+    .col
+      = f.submit "Сохранить", class: 'btn'
