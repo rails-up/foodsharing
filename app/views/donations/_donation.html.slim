@@ -1,0 +1,13 @@
+.row
+  .col
+    = link_to "Назад к списку", donations_path, class: 'btn' 
+.row
+  .col
+    h5 = donation.title
+.row    
+  .col   
+    = donation.description
+.row
+  .col
+    =< link_to "Изменить", edit_donation_path(donation), class: 'btn'
+    =< link_to "Удалить", donation_path(donation), method: :delete, class: 'btn'
