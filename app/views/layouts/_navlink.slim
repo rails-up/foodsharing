@@ -1,2 +1,7 @@
 li
   = link_to 'Предложения', donations_path
+li
+  - if user_signed_in?
+    = link_to "Выход | #{current_user.email}", destroy_user_session_path, method: :delete  
+  - else
+    = link_to 'Вход', new_user_session_path
