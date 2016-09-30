@@ -15,6 +15,7 @@ AllCops:
     - 'spec/*_helper.rb'
     - 'tmp/**/*'
     - 'vendor/**/*'
+    - 'rubocop_pre_commit_hook.rb'
     # - !ruby/regexp /myfiles\.rb$/
 
   DisplayCopNames: true

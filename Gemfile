@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim-rails'
 gem 'materialize-sass'
+gem 'devise'
+gem 'omniauth'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
