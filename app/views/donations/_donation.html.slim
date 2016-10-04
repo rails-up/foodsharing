@@ -1,6 +1,6 @@
 .row
   .col
-    = link_to "Назад к списку", donations_path, class: 'btn' 
+    = link_to t('common.back'), donations_path, class: 'btn' 
 .row
   .col
     h5 = donation.title
@@ -9,5 +9,5 @@
     = donation.description
 .row
   .col
-    =< link_to "Изменить", edit_donation_path(donation), class: 'btn'
-    =< link_to "Удалить", donation_path(donation), method: :delete, class: 'btn'
+    =< link_to t('common.edit'), edit_donation_path(donation), class: 'btn'
+    =< link_to t('common.destroy'), donation_path(donation), method: :delete, class: 'btn'
