@@ -1,0 +1,65 @@
+ru:
+  alerts:
+    access_denied: "У вас недостаточно прав."
+  notices:
+    user_created: "Пользователь создан."
+    user_updated: "Пользователь изменен."
+    user_destroyed: "Пользователь удален."
+
+  common:
+    confirm: "Вы уверены?" 
+    show: "Показать"
+    create: "Создать"
+    edit: "Изменить"
+    destroy: "Удалить"
+    back: "Назад"
+    update: "Изменить"
+    not_set: "Не указано"
+    here: "здесь"
+    hi: "Привет"
+    select: "Пожалуйста укажите"
+
+  donations:
+    common:
+      confirm: "Вы действительно хотите удалить предложение?"
+    index:
+      title: "Перечень предложений"
+      new: "Новое предложение"
+    form:
+      submit: "%{action} предложение"
+    edit:
+      title: "Изменить предложение"
+    new:
+      title: "Новое предложение"
+    show:
+      title: "Предложение"
+        
+  welcome: 
+    banner:
+      project_name: "Фудшеринг"
+      service_short_explain: 
+        "Сервис для сбора и распределения излишков продуктов питания"
+      search: "Поиск"
+    future:
+      fast_search_header: "Быстро"
+      fast_search: 
+        "Поможем быстро найти нужные продукты ..."
+      simple_interface_header: "Удобно"
+      simple_interface: 
+        "Удобный и простой интерфейс ..."
+      mobile_app_header: "Мобильно"
+      mobile_app: 
+        "Доступно на телефонах и планшетах ..."
+  layouts: 
+    footer:
+      about_header: "О проекте" 
+      about: "Мы сообщество спасения продуктов питания от уничтожения"
+      social_networks: "Мы в соцсетях"   
+      source_code: "Исходный код"
+      powered_by: "Приложение использует"
+    navbar:
+    navlink:
+      donations: "Предложения"
+      sign_out: "Выход"
+      sign_in: "Вход"
+

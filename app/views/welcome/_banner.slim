@@ -1,12 +1,12 @@
 .parallax-container id="index-banner"
   .section.no-pad-bot 
     .container.glass
-      h1.header.center.orange-text Фудшеринг
+      h1.header.center.orange-text = t('.project_name')
       .row.center
         h5.header.col.s12.light 
-          = "интернет-платформа для сбора и распределения излишков еды"
+          = t('.service_short_explain')
       .row.center
-        = link_to "Найти", donations_path, class: "btn-large waves-effect waves-light orange" 
+        = link_to t('.search'), donations_path, class: "btn-large waves-effect waves-light orange" 
 
   .parallax 
     img src="/images/banner.jpg" alt="Food"

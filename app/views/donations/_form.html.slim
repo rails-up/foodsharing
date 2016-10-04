@@ -1,17 +1,17 @@
 .row
   .col
-    = link_to "Назад к списку", donations_path, class: 'btn' 
+    = link_to t('common.back'), donations_path, class: 'btn' 
 
 = form_for @donation do |f|
   = render 'common/errors', resource: @donation
   .row
     .field.input-field.col
-      = f.label :title, "Заголовок", class: 'active'
-      = f.text_field :title , placeholder: 'Заголовок предложения'
+      = f.label :title, class: 'active'
+      = f.text_field :title 
   .row
     .field.input-field.col
-      = f.label :description, "Описание", class: 'active'
-      = f.text_area :description , placeholder: 'Описание предложения', class: 'materialize-textarea'
+      = f.label :description, class: 'active'
+      = f.text_area :description, class: 'materialize-textarea'
   .row  
     .col
-      = f.submit "Сохранить", class: 'btn'
+      = f.submit t('.submit', action: @donation.new_record? ? t('common.create') : t('common.update')), class: 'btn'
