@@ -27,5 +27,5 @@ ru:
           attributes:
             email:
               taken: "- пользователь с таким email уже зарегистрирован"
-            name:
+            full_name:
               blank: "- имя не может быть пустым"        
