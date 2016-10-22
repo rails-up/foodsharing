@@ -1,0 +1,3 @@
+h3 = t('.title')
+p = link_to t('.new'), new_article_path, class: 'btn'
+= render partial: 'articles', collection: @articles, as: 'article'

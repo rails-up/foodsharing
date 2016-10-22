@@ -7,7 +7,7 @@ ru:
     user_destroyed: "Пользователь удален."
 
   common:
-    confirm: "Вы уверены?" 
+    confirm: "Вы уверены?"
     show: "Показать"
     create: "Создать"
     edit: "Изменить"
@@ -33,33 +33,46 @@ ru:
       title: "Новое предложение"
     show:
       title: "Предложение"
-        
-  welcome: 
+
+  welcome:
     banner:
       project_name: "Фудшеринг"
-      service_short_explain: 
+      service_short_explain:
         "Сервис для сбора и распределения излишков продуктов питания"
       search: "Поиск"
     future:
       fast_search_header: "Быстро"
-      fast_search: 
+      fast_search:
         "Поможем быстро найти нужные продукты ..."
       simple_interface_header: "Удобно"
-      simple_interface: 
+      simple_interface:
         "Удобный и простой интерфейс ..."
       mobile_app_header: "Мобильно"
-      mobile_app: 
+      mobile_app:
         "Доступно на телефонах и планшетах ..."
-  layouts: 
+  layouts:
     footer:
-      about_header: "О проекте" 
+      about_header: "О проекте"
       about: "Мы сообщество спасения продуктов питания от уничтожения"
-      social_networks: "Мы в соцсетях"   
+      social_networks: "Мы в соцсетях"
       source_code: "Исходный код"
       powered_by: "Приложение использует"
     navbar:
     navlink:
       donations: "Предложения"
+      articles: "Блог"
       sign_out: "Выход"
       sign_in: "Вход"
 
+  articles:
+    index:
+      title: "Все статьи"
+      new: "Новая статья"
+    new:
+      new_article: "Новая статья"
+    edit:
+      title: "Изменить статью"
+    show:
+      title: "Статья"
+    form:
+      submit: "%{action} статью"
