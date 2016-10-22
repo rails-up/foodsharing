@@ -8,10 +8,11 @@ feature 'Delete Article', %q(
   given(:t_destroy) { t('common.destroy') }
   given(:article) { create :article }
 
-  scenario 'try to delete article' do
+  scenario 'try to delete article', js: true do
     visit article_path(article)
-    click_on t_destroy
-    # after confirmation it should redirect to articles_path where we can see title:
-    expect(page).to have_content t('articles.index.title')
+    page.accept_confirm do
+      click_on t_destroy
+    end
+    expect(page).to_not have_content article.title
   end
 end
