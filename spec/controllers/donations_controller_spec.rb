@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DonationsController, type: :controller do
   let(:donation) { create(:donation) }
+  let(:user) { create :user }
 
   describe 'GET #index' do
     let(:donations) { create_list(:donation, 2) }
@@ -29,7 +30,10 @@ RSpec.describe DonationsController, type: :controller do
   end
 
   describe 'GET #new' do
-    before { get :new }
+    before do
+      sign_in user
+      get :new
+    end
 
     it 'assigns a new Donation to @donation' do
       expect(assigns(:donation)).to be_a_new(Donation)
@@ -41,7 +45,10 @@ RSpec.describe DonationsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    before { get :edit, params: { id: donation } }
+    before do
+      sign_in user
+      get :edit, params: { id: donation }
+    end
 
     it 'assigns the requested donation to @donation' do
       expect(assigns(:donation)).to eq donation
@@ -53,10 +60,22 @@ RSpec.describe DonationsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:subject) { post :create, params: { donation: attributes_for(:donation) } }
-    let(:invalid_subject) { post :create, params: { donation: attributes_for(:invalid_donation) } }
+    let(:subject) do
+      post :create, params: { donation: attributes_for(:donation) }
+    end
+    let(:invalid_subject) do
+      post :create, params: { donation: attributes_for(:invalid_donation) }
+    end
+
+    context 'when user unauthenticated' do
+      it 'does not save the donation' do
+        expect { subject }.to_not change(Donation, :count)
+      end
+    end
 
     context 'with valid attributes' do
+      before { sign_in user }
+
       it 'saves new donation in the database' do
         expect { subject }.to change(Donation, :count).by(1)
       end
@@ -68,6 +87,8 @@ RSpec.describe DonationsController, type: :controller do
     end
 
     context 'with invalid attributes' do
+      before { sign_in user }
+
       it 'does not save the donation' do
         expect { invalid_subject }.to_not change(Donation, :count)
       end
@@ -95,7 +116,18 @@ RSpec.describe DonationsController, type: :controller do
             }
     end
 
+    context 'when user unauthenticated' do
+      it 'not change donation attributes' do
+        update_donation_attr
+        donation.reload
+        expect(donation.title).to_not eq 'edited title'
+        expect(donation.description).to_not eq 'edited description'
+      end
+    end
+
     context 'with valid attributes' do
+      before { sign_in user }
+
       it 'assigns the requested donation to @donation' do
         update_donation
         expect(assigns(:donation)).to eq donation
@@ -117,6 +149,7 @@ RSpec.describe DonationsController, type: :controller do
 
     context 'with invalid attributes' do
       before do
+        sign_in user
         patch :update,
               params: {
                 id: donation,
@@ -142,13 +175,23 @@ RSpec.describe DonationsController, type: :controller do
     end
     before { donation }
 
-    it 'delete donation' do
-      expect { destroy_donation }.to change(Donation, :count).by(-1)
+    context 'when user unauthenticated' do
+      it 'does not delete donation' do
+        expect { destroy_donation }.to_not change(Donation, :count)
+      end
     end
 
-    it 'redirect to index view' do
-      destroy_donation
-      expect(response).to redirect_to donations_path
+    context 'when user authenticated' do
+      before { sign_in user }
+
+      it 'delete donation' do
+        expect { destroy_donation }.to change(Donation, :count).by(-1)
+      end
+
+      it 'redirect to index view' do
+        destroy_donation
+        expect(response).to redirect_to donations_path
+      end
     end
   end
 end

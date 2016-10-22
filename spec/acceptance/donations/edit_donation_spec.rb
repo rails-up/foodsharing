@@ -18,26 +18,39 @@ feature 'Edit Donation', %q(
     #{t('activerecord.errors.messages.blank')}"
   end
   given(:donation) { create :donation }
+  given(:user) { create :user }
 
-  scenario 'try to edit donation with valid params' do
-    visit donation_path(donation)
-    click_on t_edit
-    fill_in t_title, with: 'Edited donation title'
-    fill_in t_description, with: 'Edited donation description'
-    click_on t_submit
-    expect(page).to have_content 'Edited donation title'
-    expect(page).to have_content 'Edited donation description'
-    expect(page).to_not have_content donation.title
-    expect(page).to_not have_content donation.description
+  describe 'Unauthenticated user' do
+    scenario 'try edit donation' do
+      visit donation_path(donation)
+      expect(page).to_not have_link t_edit
+    end
   end
 
-  scenario 'try to edit donation with invalid params' do
-    visit donation_path(donation)
-    click_on t_edit
-    fill_in t_title, with: nil
-    fill_in t_description, with: nil
-    click_on t_submit
-    expect(page).to have_content t_title_eror
-    expect(page).to have_content t_description_eror
+  describe 'Authenticated user' do
+
+    before do
+      sign_in user
+      visit donation_path(donation)
+      click_on t_edit
+    end
+
+    scenario 'try to edit donation with valid params' do
+      fill_in t_title, with: 'Edited donation title'
+      fill_in t_description, with: 'Edited donation description'
+      click_on t_submit
+      expect(page).to have_content 'Edited donation title'
+      expect(page).to have_content 'Edited donation description'
+      expect(page).to_not have_content donation.title
+      expect(page).to_not have_content donation.description
+    end
+
+    scenario 'try to edit donation with invalid params' do
+      fill_in t_title, with: nil
+      fill_in t_description, with: nil
+      click_on t_submit
+      expect(page).to have_content t_title_eror
+      expect(page).to have_content t_description_eror
+    end
   end
 end

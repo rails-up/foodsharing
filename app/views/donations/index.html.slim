@@ -1,3 +1,5 @@
 h3 = t('.title')
-p = link_to t('.new'), new_donation_path, class: 'btn'
+- if user_signed_in?
+  p = link_to t('.new'), new_donation_path, class: 'btn'
+
 = render partial: 'donations', collection: @donations, as: 'donation'

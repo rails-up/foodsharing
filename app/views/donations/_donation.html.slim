@@ -9,5 +9,6 @@
     = donation.description
 .row
   .col
-    =< link_to t('common.edit'), edit_donation_path(donation), class: 'btn'
-    =< link_to t('common.destroy'), donation_path(donation), method: :delete, class: 'btn'
+    - if user_signed_in?
+      =< link_to t('common.edit'), edit_donation_path(donation), class: 'btn'
+      =< link_to t('common.destroy'), donation_path(donation), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn'
