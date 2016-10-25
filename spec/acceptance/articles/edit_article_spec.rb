@@ -5,6 +5,9 @@ feature 'Edit Article', %q(
   I wan to be able to edit article
 ) do
 
+  let(:user) { create(:user) }
+  before { sign_in user }
+
   given(:t_edit) { t('common.edit') }
   given(:t_title) { t('activerecord.attributes.article.title') }
   given(:t_content) { t('activerecord.attributes.article.content') }
@@ -39,5 +42,11 @@ feature 'Edit Article', %q(
     click_on t_submit
     expect(page).to have_content t_title_error
     expect(page).to have_content t_content_error
+  end
+
+  scenario 'not logged user can not edit article' do
+    sign_out user
+    visit article_path(article)
+    expect(page).to_not have_content t_edit
   end
 end

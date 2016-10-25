@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
   let(:article) { create(:article) }
+  let(:articles) { create_list(:article, 3) }
+  let(:user) { create(:user) }
+  before do
+      sign_in user
+  end
 
   describe 'GET #index' do
-    let(:articles) { create_list(:article, 3) }
     before { get :index }
 
     it 'populates an array of all articles' do
@@ -54,7 +58,7 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe 'POST #create' do
     let(:subject) { post :create, params: { article: attributes_for(:article) } }
-    let(:invalid_subject) { post :create, params: { article: attributes_for(:invalid_article)}}
+    let(:invalid_subject) { post :create, params: { article: attributes_for(:invalid_article) } }
 
     context 'with valid attributes' do
       it 'saves new article in the database' do
