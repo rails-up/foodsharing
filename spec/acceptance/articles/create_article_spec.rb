@@ -10,6 +10,9 @@ feature 'Create Article', %q(
   given(:t_content) { t('activerecord.attributes.article.content') }
   given(:t_submit) { t('articles.form.submit', action: t('common.create')) }
 
+  let(:user) { create(:user) }
+  before { sign_in user }
+
   before { visit articles_path }
 
   scenario 'try create valid article' do
@@ -30,6 +33,10 @@ feature 'Create Article', %q(
     #{t('activerecord.errors.messages.blank')}"
     expect(page).to have_content "#{t('activerecord.attributes.article.content')}
     #{t('activerecord.errors.messages.blank')}"
+  end
 
+  scenario 'not logged user can not create article' do
+    sign_out user
+    expect(page).to_not have_content t_new
   end
 end
