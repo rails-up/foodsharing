@@ -26,6 +26,7 @@ ru:
         invalid: "- поле содержит неверные данные"
         confirmation: "- поле не совпадает"
         too_short: "- значение поля слишком короткое"
+        record_invalid: "%{errors}"
       models:
         user:
           attributes:
