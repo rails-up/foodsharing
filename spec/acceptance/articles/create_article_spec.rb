@@ -36,7 +36,7 @@ feature 'Create Article', %q(
   end
 
   scenario 'not logged user can not create article' do
-    sign_out user
+    sign_out
     expect(page).to_not have_content t_new
   end
 end

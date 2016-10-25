@@ -45,7 +45,7 @@ feature 'Edit Article', %q(
   end
 
   scenario 'not logged user can not edit article' do
-    sign_out user
+    sign_out
     visit article_path(article)
     expect(page).to_not have_content t_edit
   end

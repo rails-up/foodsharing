@@ -20,7 +20,7 @@ feature 'Delete Article', %q(
   end
 
   scenario 'not logged user can not delete article' do
-    sign_out user
+    sign_out
     visit article_path(article)
     expect(page).to_not have_content t_destroy
   end
