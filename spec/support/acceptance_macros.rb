@@ -6,7 +6,7 @@ module AcceptanceMacros
     click_on t('devise.sessions.new.sign_in')
   end
 
-  def sign_out(user)
+  def sign_out
     within("ul.hide-on-med-and-down") do
       click_on t('layouts.navlink.sign_out')
     end
