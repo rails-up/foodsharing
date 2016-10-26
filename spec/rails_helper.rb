@@ -39,10 +39,6 @@ RSpec.configure do |config|
   config.include AcceptanceMacros, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :controller
 
-  config.include Devise::Test::ControllerHelpers, :type => :controller
-  config.extend AcceptanceMacros, :type => :controller
-
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
