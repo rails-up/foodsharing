@@ -12,11 +12,11 @@ ready = ->
   $alert = $('.alert')
   if ($alert.text() != '')
     Materialize.toast($alert, 10000, 'orange')
-    
+
   $errors = $('#error_explanation')
   if ($errors)
     Materialize.toast($errors, 10000 ,'red')
 
 $(document).ready(ready)
-$(document).on('page:load', ready)
-$(document).on('page:update', ready)
+$(document).on('turbolinks:load', ready)
+$(document).on('turbolinks:update', ready)
