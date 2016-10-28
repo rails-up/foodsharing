@@ -11,7 +11,8 @@ RSpec.describe ArticlesController, type: :controller do
   describe 'GET #index' do
     before { get :index }
 
-    it 'populates an array of all articles' do
+    it 'populates an array of all published articles' do
+      articles.each { |article| article.published! }
       expect(assigns(:articles)).to match_array(articles)
     end
 
