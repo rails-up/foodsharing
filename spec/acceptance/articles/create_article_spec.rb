@@ -39,4 +39,5 @@ feature 'Create Article', %q(
     sign_out
     expect(page).to_not have_content t_new
   end
+
 end
