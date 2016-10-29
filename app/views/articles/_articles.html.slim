@@ -1,4 +1,11 @@
 .divider
 .section
   h5 = link_to article.title, article_path(article)
+
+- if user_signed_in?
+  = link_to "[#{t('common.edit')}]", edit_article_path(article) if article.user_id == current_user.id
+  = link_to "[#{t('common.destroy')}]", article_path(article), method: :delete, data: {confirm: t('common.confirm')} if article.user == current_user
+
+.section
+  small = article.status
   p = article.content

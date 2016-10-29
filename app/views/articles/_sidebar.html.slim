@@ -1,0 +1,8 @@
+h5 Sidebar
+
+- if user_signed_in?
+  = link_to t('.all_articles'), articles_path, class: "btn-flat #{ 'disabled' if params[:my_articles].nil? && params[:action] == 'index' }" if current_user.editor?
+  h5 = t('.my_articles')
+  = link_to "#{t('.published')} [#{current_user.articles.where(status: :published).count}]", articles_path(my_articles: :published), class: "btn-flat #{'disabled' if params[:my_articles] == 'published'}" if current_user.editor?
+  = link_to "#{t('.draft')} [#{current_user.articles.where(status: :draft).count}]", articles_path(my_articles: :draft), class: "btn-flat #{'disabled' if params[:my_articles] == 'draft'}" if current_user.editor?
+  = link_to t('.new'), new_article_path, class: 'btn' if current_user.editor?

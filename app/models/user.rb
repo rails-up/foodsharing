@@ -3,4 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable, :omniauthable
   validates :full_name, presence: true
+
+  enum role: [:visitor, :editor]
+
+  has_many :articles
 end

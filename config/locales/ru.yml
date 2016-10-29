@@ -18,6 +18,7 @@ ru:
     here: "здесь"
     hi: "Привет"
     select: "Пожалуйста укажите"
+    not_allowed: "У вас недостаточно прав"
 
   donations:
     common:
@@ -66,8 +67,12 @@ ru:
 
   articles:
     index:
-      title: "Все статьи"
+    sidebar:
       new: "Новая статья"
+      my_articles: "Мои статьи"
+      all_articles: "Все статьи"
+      published: "Опубликованные"
+      draft: "Черновики"
     new:
       new_article: "Новая статья"
     edit:

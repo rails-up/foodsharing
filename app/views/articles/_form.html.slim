@@ -5,6 +5,10 @@
 = form_for @article do |f|
   = render 'common/errors', resource: @article
   .row
+    .field.input-field.col.l6.s12
+      = f.label :status, class: 'active'
+      = f.select :status, Article.statuses.keys.to_a
+  .row
     .field.input-field.col.s12
       = f.label :title, class: 'active'
       = f.text_field :title

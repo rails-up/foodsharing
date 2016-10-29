@@ -18,5 +18,5 @@ ready = ->
     Materialize.toast($errors, 10000 ,'red')
 
 $(document).ready(ready)
-$(document).on('turbolinks:load', ready)
-$(document).on('turbolinks:update', ready)
+$(document).on('page:load', ready)
+$(document).on('page:update', ready)

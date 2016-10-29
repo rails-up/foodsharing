@@ -7,7 +7,8 @@
 .row
   .col
     = article.content
-.row
-  .col
-    =< link_to t('common.edit'), edit_article_path(article), class: 'btn' if user_signed_in?
-    =< link_to t('common.destroy'), article_path(article), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn' if user_signed_in?
+- if user_signed_in?
+  .row
+    .col
+      =< link_to t('common.edit'), edit_article_path(article), class: 'btn' if article.user == current_user && current_user.editor?
+      =< link_to t('common.destroy'), article_path(article), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn' if article.user == current_user && current_user.editor?

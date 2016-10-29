@@ -1,3 +1,6 @@
-h3 = t('.title')
-
-== render @article
+.row
+  .col.l8.s12
+    h3 = t('.title')
+    == render @article
+  .col.l4.s12
+    = render partial: 'sidebar'
