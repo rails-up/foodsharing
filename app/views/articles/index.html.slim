@@ -1,3 +1,5 @@
-h3 = t('.title')
-p = link_to t('.new'), new_article_path, class: 'btn' if user_signed_in?
-= render partial: 'articles', collection: @articles, as: 'article'
+.row
+  .col.l8.s12
+    = render partial: 'articles', collection: @articles, as: 'article'
+  .col.l4.s12
+    = render partial: 'sidebar'

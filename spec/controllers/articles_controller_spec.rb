@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
-  let(:article) { create(:article) }
-  let(:articles) { create_list(:article, 3) }
   let(:user) { create(:user) }
   before do
+    user.editor!
     sign_in user
   end
+  let(:article) { create(:article, user: user) }
+  let(:articles) { create_list(:article, 3, user: user) }
 
   describe 'GET #index' do
     before { get :index }
@@ -155,6 +156,54 @@ RSpec.describe ArticlesController, type: :controller do
 
     it 'redirect to index view' do
       destroy_article
+      expect(response).to redirect_to articles_path
+    end
+  end
+
+  describe 'Limit access to not appropriate user' do
+    let(:user2) { create(:user) }
+    before do
+      user2.editor!
+      sign_in user
+    end
+    let(:article2) { create(:article, user: user2) }
+
+    it 'redirect to index view if has not access to view draft article' do
+      get :show, params: { id: article2 }
+      expect(response).to redirect_to articles_path
+    end
+
+    it 'redirect to index view if has no access to edit draft article' do
+      get :edit, params: { id: article2 }
+      expect(response).to redirect_to articles_path
+    end
+
+    it 'redirect to index view if has no access to delete article' do
+      delete :destroy, params: { id: article2 }
+      expect(response).to redirect_to articles_path
+    end
+  end
+
+  describe 'Limit access to not logged in visitor' do
+    let(:user2) { create(:user) }
+    before do
+      user2.editor!
+      destroy_user_session_path
+    end
+    let(:article2) { create(:article, user: user2) }
+
+    it 'redirect to index view if has not access to view draft article' do
+      get :show, params: { id: article2 }
+      expect(response).to redirect_to articles_path
+    end
+
+    it 'redirect to index view if has no access to edit draft article' do
+      get :edit, params: { id: article2 }
+      expect(response).to redirect_to articles_path
+    end
+
+    it 'redirect to index view if has no access to delete article' do
+      delete :destroy, params: { id: article2 }
       expect(response).to redirect_to articles_path
     end
   end

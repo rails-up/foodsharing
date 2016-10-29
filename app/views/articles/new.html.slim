@@ -1,3 +1,6 @@
-h3 = t('.new_article')
-
-== render 'form'
+.row
+  .col.l8.s12
+    h3 = t('.new_article')
+    == render 'form'
+  .col.l4.s12
+    = render partial: 'sidebar'
