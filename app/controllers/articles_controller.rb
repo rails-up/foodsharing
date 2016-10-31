@@ -65,15 +65,9 @@ class ArticlesController < ApplicationController
   end
 
   def hide_not_published
-    if !@article.published?
-      if user_signed_in?
-        if @article.user_id != current_user.id
-          not_allowed(articles_path)
-        end
-      else
-        not_allowed(articles_path)
-      end
-    end
+    return nil if @article.published?
+    return nil if user_signed_in? && @article.user_id == current_user.id
+    not_allowed(articles_path)
   end
 
   def not_allowed(path)
