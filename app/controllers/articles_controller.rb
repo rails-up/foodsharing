@@ -7,11 +7,11 @@ class ArticlesController < ApplicationController
   def index
     case params[:my_articles]
     when 'published'
-      @articles = Article.where(user_id: current_user.id, status: :published)
+      current_user ? @articles = Article.where(user_id: current_user.id, status: :published) : not_allowed(articles_path)
     when 'draft'
-      @articles = Article.where(user_id: current_user.id, status: :draft)
+      current_user ? @articles = Article.where(user_id: current_user.id, status: :draft) : not_allowed(articles_path)
     else
-      @articles = Article.published
+      @articles = Article.where(status: :published)
     end
   end
 
@@ -60,8 +60,7 @@ class ArticlesController < ApplicationController
 
   def check_access
     if @article.user_id != current_user.id
-      flash[:notice] = t('common.not_allowed')
-      redirect_to articles_path
+      not_allowed(articles_path)
     end
   end
 
@@ -69,13 +68,16 @@ class ArticlesController < ApplicationController
     if !@article.published?
       if user_signed_in?
         if @article.user_id != current_user.id
-          flash[:notice] = t('common.not_allowed')
-          redirect_to articles_path
+          not_allowed(articles_path)
         end
       else
-        flash[:notice] = t('common.not_allowed')
-        redirect_to articles_path
+        not_allowed(articles_path)
       end
     end
+  end
+
+  def not_allowed(path)
+    flash[:notice] = t('common.not_allowed')
+    redirect_to path
   end
 end
