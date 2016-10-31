@@ -206,5 +206,10 @@ RSpec.describe ArticlesController, type: :controller do
       delete :destroy, params: { id: article2 }
       expect(response).to redirect_to articles_path
     end
+
+    # it 'redirect to index view if has not access to view draft articles' do
+    #   get :index, { my_articles: :draft }
+    #   expect(response).to redirect_to articles_path
+    # end
   end
 end
