@@ -4,13 +4,15 @@ RSpec.describe ArticlesController, type: :controller do
   let(:user) { create(:user) }
   before do
     user.editor!
-    sign_in user
   end
   let(:article) { create(:article, user: user) }
   let(:articles) { create_list(:article, 3, user: user) }
 
   describe 'GET #index' do
-    before { get :index }
+    before do
+      sign_in user
+      get :index
+    end
 
     it 'populates an array of all published articles' do
       articles.each { |article| article.published! }
@@ -23,7 +25,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { get :show, params: { id: article } }
+    before do
+      sign_in user
+      get :show, params: { id: article }
+    end
 
     it 'assigns the requested article to @article' do
       expect(assigns(:article)).to eq article
@@ -35,7 +40,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'GET #new' do
-    before { get :new }
+    before do
+      sign_in user
+      get :new
+    end
 
     it 'assigns a new Article to @article' do
       expect(assigns(:article)).to be_a_new(Article)
@@ -47,7 +55,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'GET #edit' do
-    before { get :edit, params: { id: article } }
+    before do
+      sign_in user
+      get :edit, params: { id: article }
+    end
 
     it 'assigns the requested article to @article' do
       expect(assigns(:article)).to eq article
@@ -59,6 +70,9 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'POST #create' do
+    before do
+      sign_in user
+    end
     let(:subject) { post :create, params: { article: attributes_for(:article) } }
     let(:invalid_subject) { post :create, params: { article: attributes_for(:invalid_article) } }
 
@@ -86,6 +100,9 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'PATH #update' do
+    before do
+      sign_in user
+    end
     let(:update_article) do
       patch :update,
             params: {
@@ -145,6 +162,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    before do
+      sign_in user
+    end
+
     let(:destroy_article) do
       delete :destroy, params: { id: article }
     end
@@ -188,7 +209,6 @@ RSpec.describe ArticlesController, type: :controller do
     let(:user2) { create(:user) }
     before do
       user2.editor!
-      destroy_user_session_path
     end
     let(:article2) { create(:article, user: user2) }
 
@@ -197,19 +217,19 @@ RSpec.describe ArticlesController, type: :controller do
       expect(response).to redirect_to articles_path
     end
 
-    it 'redirect to index view if has no access to edit draft article' do
+    it 'redirect to log in page if has no access to edit draft article' do
       get :edit, params: { id: article2 }
-      expect(response).to redirect_to articles_path
+      expect(response).to redirect_to new_user_session_path
     end
 
-    it 'redirect to index view if has no access to delete article' do
+    it 'redirect to log in page if has no access to delete article' do
       delete :destroy, params: { id: article2 }
-      expect(response).to redirect_to articles_path
+      expect(response).to redirect_to new_user_session_path
     end
 
-    # it 'redirect to index view if has not access to view draft articles' do
-    #   get :index, { my_articles: :draft }
-    #   expect(response).to redirect_to articles_path
-    # end
+    it 'redirect to index view if has not access to view draft articles' do
+      get :index, params: { my_articles: :draft }
+      expect(response).to redirect_to articles_path
+    end
   end
 end
