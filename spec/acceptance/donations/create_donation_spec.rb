@@ -12,14 +12,13 @@ feature 'Create Donation', %q(
   given(:user) { create(:user) } # FactoryGirl.create
 
   describe 'Unauthenticated user' do
-    scenario 'try creates donation' do
+    scenario 'can not creates donation' do
       visit donations_path
       expect(page).to_not have_link t_new
     end
   end
 
   describe 'Authenticated user' do
-
     before do
       sign_in user
       visit donations_path

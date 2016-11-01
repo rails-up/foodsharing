@@ -17,40 +17,50 @@ feature 'Edit Donation', %q(
     "#{t('activerecord.attributes.donation.description')}
     #{t('activerecord.errors.messages.blank')}"
   end
-  given(:donation) { create :donation }
   given(:user) { create :user }
+  given(:donation) { create :donation, user: user }
+  given(:donation_another_user) { create :donation }
 
   describe 'Unauthenticated user' do
-    scenario 'try edit donation' do
+    scenario 'can not edit donation' do
       visit donation_path(donation)
       expect(page).to_not have_link t_edit
     end
   end
 
   describe 'Authenticated user' do
+    before { sign_in user }
 
-    before do
-      sign_in user
-      visit donation_path(donation)
-      click_on t_edit
+    describe 'try to edit own donation' do
+      before do
+        visit donation_path(donation)
+        click_on t_edit
+      end
+
+      scenario 'with valid params' do
+        fill_in t_title, with: 'Edited donation title'
+        fill_in t_description, with: 'Edited donation description'
+        click_on t_submit
+        expect(page).to have_content 'Edited donation title'
+        expect(page).to have_content 'Edited donation description'
+        expect(page).to_not have_content donation.title
+        expect(page).to_not have_content donation.description
+      end
+
+      scenario 'with invalid params' do
+        fill_in t_title, with: nil
+        fill_in t_description, with: nil
+        click_on t_submit
+        expect(page).to have_content t_title_eror
+        expect(page).to have_content t_description_eror
+      end
     end
 
-    scenario 'try to edit donation with valid params' do
-      fill_in t_title, with: 'Edited donation title'
-      fill_in t_description, with: 'Edited donation description'
-      click_on t_submit
-      expect(page).to have_content 'Edited donation title'
-      expect(page).to have_content 'Edited donation description'
-      expect(page).to_not have_content donation.title
-      expect(page).to_not have_content donation.description
-    end
-
-    scenario 'try to edit donation with invalid params' do
-      fill_in t_title, with: nil
-      fill_in t_description, with: nil
-      click_on t_submit
-      expect(page).to have_content t_title_eror
-      expect(page).to have_content t_description_eror
+    describe 'can not edit donation another user' do
+      scenario 'user not sees link to edit' do
+        visit donation_path(donation_another_user)
+        expect(page).to_not have_link t_edit
+      end
     end
   end
 end
