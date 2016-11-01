@@ -6,20 +6,25 @@ feature 'Delete Donation', %q(
 ) do
 
   given(:t_destroy) { t('common.destroy') }
-  given(:donation) { create :donation }
   given(:user) { create :user }
+  given(:donation) { create :donation, user: user }
+  given(:donation_another_user) { create :donation }
 
   describe 'Authenticated user' do
-    scenario 'try to delete donation' do
-      sign_in user
+    before { sign_in user }
+    scenario 'try to delete own donation' do
       visit donation_path(donation)
       click_on t_destroy
       expect(page).to_not have_content donation.title
     end
+    scenario 'can not delete donation another user' do
+      visit donation_path(donation_another_user)
+      expect(page).to_not have_link t_destroy
+    end
   end
 
   describe 'Unauthenticated user' do
-    scenario 'try to delete donation' do
+    scenario 'can not delete donation' do
       visit donation_path(donation)
       expect(page).to_not have_link t_destroy
     end

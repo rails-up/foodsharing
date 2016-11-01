@@ -10,10 +10,12 @@ FactoryGirl.define do
   factory :donation do
     title
     description
+    user
   end
 
   factory :invalid_donation, class: 'Donation' do
     title nil
     description nil
+    user nil
   end
 end
