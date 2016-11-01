@@ -59,9 +59,7 @@ class ArticlesController < ApplicationController
   end
 
   def check_access
-    if @article.user_id != current_user.id
-      not_allowed(articles_path)
-    end
+    not_allowed(articles_path) unless @article.user_id == current_user.id
   end
 
   def hide_not_published
