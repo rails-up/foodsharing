@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe DonationsController, type: :controller do
-  let(:donation) { create(:donation) }
   let(:user) { create :user }
+  let(:another_user) { create :user }
+  let(:donation) { create :donation, user: user }
 
   describe 'GET #index' do
     let(:donations) { create_list(:donation, 2) }
@@ -125,7 +126,7 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'with valid attributes' do
+    context 'when user edit own donation' do
       before { sign_in user }
 
       it 'assigns the requested donation to @donation' do
@@ -147,7 +148,24 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'with invalid attributes' do
+    context 'when user edit donation another user' do
+      before do
+        sign_in another_user
+        update_donation_attr
+      end
+
+      it 'not change donation attributes' do
+        donation.reload
+        expect(donation.title).to_not eq 'edited title'
+        expect(donation.description).to_not eq 'edited description'
+      end
+
+      it 'render to the show donation' do
+        expect(response).to redirect_to donation
+      end
+    end
+
+    context 'then user edit donation with invalid attributes' do
       before do
         sign_in user
         patch :update,
@@ -191,6 +209,19 @@ RSpec.describe DonationsController, type: :controller do
       it 'redirect to index view' do
         destroy_donation
         expect(response).to redirect_to donations_path
+      end
+    end
+
+    context 'when user delete donation another user' do
+      before { sign_in another_user }
+
+      it 'does not delete donation' do
+        expect { destroy_donation }.to_not change(Donation, :count)
+      end
+
+      it 'render to the show donation' do
+        destroy_donation
+        expect(response).to redirect_to donation
       end
     end
   end

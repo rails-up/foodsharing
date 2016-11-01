@@ -1,6 +1,7 @@
 class DonationsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :load_donation, only: [:show, :edit, :update, :destroy]
+  before_action :check_access, only: [:edit, :update, :destroy]
 
   def index
     @donations = Donation.all
@@ -46,5 +47,14 @@ class DonationsController < ApplicationController
 
   def donation_params
     params.require(:donation).permit(:title, :description)
+  end
+
+  def check_access
+    not_allowed unless @donation.user == current_user
+  end
+
+  def not_allowed
+    flash[:notice] = t('common.not_allowed')
+    redirect_to donation_path(@donation)
   end
 end
