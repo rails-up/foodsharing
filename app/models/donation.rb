@@ -1,3 +1,4 @@
 class Donation < ApplicationRecord
-  validates :title, :description, presence: true
+  belongs_to :user
+  validates :title, :description, :user_id, presence: true
 end
