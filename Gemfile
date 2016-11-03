@@ -33,6 +33,8 @@ gem 'slim-rails'
 gem 'materialize-sass'
 gem 'devise'
 gem 'omniauth'
+gem 'authority'
+gem 'rolify'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
