@@ -1,13 +1,32 @@
-.parallax-container id="index-banner"
-  .section.no-pad-bot 
-    .container.glass
-      h1.header.center.orange-text = t('.project_name')
-      .row.center
-        h5.header.col.s12.light 
-          = t('.service_short_explain')
-      .row.center
-        = link_to t('.search'), donations_path, class: "btn-large waves-effect waves-light orange" 
+section.cover-image.video-section
+  a.player#bgndVideo data-property="{videoURL:'https://www.youtube.com/watch?v=95SNbn340TE',containment:'.video-section', quality:'large', autoPlay:true, mute:true, opacity:1}"
+  div.jumbotron.transparent.offset-md-2.col-md-8
+    h1.display-3 = t('.project_name')
+    p.lead = t('.service_short_explain')
+    p.lead
+      = link_to t('.search'), donations_path, class: "btn btn-success btn-lg" 
+  
+  
+/   <div class="jumbotron">
+/   <h1 class="display-3">Hello, world!</h1>
+/   <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+/   <hr class="my-2">
+/   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+/   <p class="lead">
+/     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+/   </p>
+/ </div>
 
-  .parallax 
-    img src="/images/banner.jpg" alt="Food"
-
+/ .parallax-container id="index-banner"
+/   .section.no-pad-bot 
+/     .container.glass
+/       h1.header.center.orange-text = t('.project_name')
+/       .row.center
+/         h5.header.col.s12.light 
+/           = t('.service_short_explain')
+/       .row.center
+/         = link_to t('.search'), donations_path, class: "btn-large waves-effect waves-light orange" 
+/ 
+/   .parallax 
+/     img src="/images/banner.jpg" alt="Food"
+/ 

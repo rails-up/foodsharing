@@ -1,0 +1,25 @@
+.cover-image {
+  padding-top: 0px;
+  height: 93vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-image: image-url("banner.jpg");
+}
+
+.video-section {
+background-color: rgba(71, 71, 71, 0.59);
+}
+
+.video-section .buttonBar{display:none;}
+.player {font-size: 1px;}
+
+.transparent {
+  color: #fff;
+  margin-top: (100vh/6);
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  h1 {
+    font-size: 100px;
+  }
+}
