@@ -9,6 +9,6 @@
     = donation.description
 .row
   .col
-    - if user_signed_in? && donation.user == current_user
+    - if user_signed_in? #&& donation.user == current_user
       =< link_to t('common.edit'), edit_donation_path(donation), class: 'btn'
       =< link_to t('common.destroy'), donation_path(donation), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn'
