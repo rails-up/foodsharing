@@ -1,13 +1,16 @@
-h2
-  = t('devise.common.did_not_receive_unlock_instructions')
-= form_for(resource, as: resource_name, url: unlock_path(resource_name), 
-    html: { method: :post }) do |f|
-  = devise_error_messages!
-  .row
-    .col.field.input-field
-      = f.label :email
-      = f.email_field :email, autofocus: true
-  .actions
-    = f.submit t('.resend_unlock_instructions'), class: "btn"
-br    
-= render "devise/shared/links"
+div.container
+  div.row  
+    div.offset-md-3.col-md-6
+
+      h2
+        = t('devise.common.did_not_receive_unlock_instructions')
+      = form_for(resource, as: resource_name, url: unlock_path(resource_name), 
+          html: { method: :post }) do |f|
+        = devise_error_messages!
+        .div.form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, class: 'form-control'
+        .actions
+          = f.submit t('.resend_unlock_instructions'), class: "btn"
+      br    
+      = render "devise/shared/links"

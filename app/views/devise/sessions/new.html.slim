@@ -1,20 +1,20 @@
-h2
-  = t('devise.common.sign_in')
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .row
-    .col.field.input-field
-      = f.label :email
-      = f.email_field :email, autofocus: true
-  .row
-    .col.field.input-field
-      = f.label :password
-      = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-      .row
-        .col.field
-          = f.check_box :remember_me
+div.container
+  div.row  
+    div.offset-md-3.col-md-6
+
+      h2
+        = t('devise.common.sign_in')
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        div.form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, class: 'form-control'
+        .div.form-group
+            = f.label :password
+            = f.password_field :password, autocomplete: "off", class: 'form-control'
+        - if devise_mapping.rememberable?
           = f.label :remember_me
-  .actions
-    = f.submit t('.sign_in'), class: "btn"
-br
-= render "devise/shared/links"
+          = f.check_box :remember_me
+        .actions
+          = f.submit t('.sign_in'), class: "btn btn-primary"
+      br
+      = render "devise/shared/links"
