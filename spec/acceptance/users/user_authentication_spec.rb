@@ -16,7 +16,7 @@ feature 'User authentication', %q(
 
   scenario 'Any user try to register' do
     visit root_path
-    within('.side-nav') { click_on t('layouts.navlink.sign_in') }
+    within('nav.navbar') { click_on t('layouts.navlink.sign_in') }
     click_on t('devise.common.sign_up')
 
     fill_in t_full_name, with: 'my full name'
@@ -46,7 +46,7 @@ feature 'User authentication', %q(
 
   scenario 'Registered user try logout' do
     sign_in(user)
-    within('.side-nav') { click_on t('layouts.navlink.sign_out') }
+    within('nav.navbar') { click_on t('layouts.navlink.sign_out') }
     expect(page).to have_content t('devise.sessions.signed_out')
   end
 end
