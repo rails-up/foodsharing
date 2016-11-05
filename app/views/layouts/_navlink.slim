@@ -1,9 +1,9 @@
-li
-  = link_to t('.donations'), donations_path
-li
-  = link_to t('.articles'), articles_path
-li
+li.nav-item
+  = link_to t('.donations'), donations_path, class: 'nav-link'
+li.nav-item
+  = link_to t('.articles'), articles_path, class: 'nav-link'
+li.nav-item
   - if user_signed_in?
-    = link_to "#{t('.sign_out')} (#{current_user.email})", destroy_user_session_path, method: :delete  
+    = link_to "#{t('.sign_out')} (#{current_user.email})", destroy_user_session_path, method: :delete, class: 'nav-link'  
   - else
-    = link_to t('.sign_in'), new_user_session_path
+    = link_to t('.sign_in'), new_user_session_path, class: 'nav-link'

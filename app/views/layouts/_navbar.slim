@@ -1,13 +1,7 @@
-header.navbar-fixed role="banner"
-  nav.green role="navigation"
-    .nav-wrapper.container
-      a.brand-logo id="logo-container" href="/" FS
-
-      ul.right.hide-on-med-and-down
+nav.navbar.navbar-light.bg-success
+  button.navbar-toggler.hidden-sm-up type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+  div.collapse.navbar-toggleable-xs id="navbarResponsive"
+    = link_to 'Foodsharing', root_path, class: 'navbar-brand'
+    div.float-sm-right
+      ul.nav.navbar-nav
         = render "layouts/navlink"
-
-      ul.side-nav id="nav-mobile"
-        = render "layouts/navlink"
-
-      a.button-collapse href="#" data-activates="nav-mobile" 
-        i.material-icons menu
