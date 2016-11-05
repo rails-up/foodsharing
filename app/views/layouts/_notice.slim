@@ -1,3 +1,10 @@
-/ aside.container.hide
-/   span.notice = notice
-/   span.alert = alert
+- if flash[:notice]
+  p#flash_notice.notification = flash[:notice]
+  = javascript_tag "$('#flash_notice').effect('highlight',{},1000);"
+- if flash[:alert]
+  p#flash_alert.notification = flash[:alert]
+  = javascript_tag "$('#flash_alert').effect('highlight',{},1000);"  
+- if flash[:error] || flash[:errors]
+  p#flash_errors.notification = flash[:error] || flash[:errors]
+  = javascript_tag "$('#flash_errors').effect('highlight',{},1000);"
+- flash[:error] = flash[:errors] = flash[:notice] = nil
