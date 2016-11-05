@@ -41,7 +41,8 @@ ru:
       service_short_explain:
         "Сервис для сбора и распределения излишков продуктов питания"
       search: "Поиск"
-    future:
+    features:
+      title: 'Что мы предлагаем'
       fast_search_header: "Быстро"
       fast_search:
         "Поможем быстро найти нужные продукты ..."
