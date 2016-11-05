@@ -1,14 +1,11 @@
-.row
-  .col
-    = link_to t('common.back'), articles_path, class: 'btn'
-.row
-  .col
-    h5 = article.title
-.row
-  .col
-    = article.content
-- if user_signed_in?
-  .row
-    .col
-      =< link_to t('common.edit'), edit_article_path(article), class: 'btn' if article.user == current_user && current_user.editor?
-      =< link_to t('common.destroy'), article_path(article), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn' if article.user == current_user && current_user.editor?
+div.container
+  div.row  
+    div.col-xs-12
+      = link_to t('common.back'), articles_path, class: 'btn btn-outline-primary'
+      - if user_signed_in?
+        =< link_to t('common.edit'), edit_article_path(article), class: 'btn btn-outline-primary' if article.user == current_user && current_user.editor?
+        =< link_to t('common.destroy'), article_path(article), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn btn-outline-primary' if article.user == current_user && current_user.editor?
+
+      h5 = article.title
+      = article.content
+      
