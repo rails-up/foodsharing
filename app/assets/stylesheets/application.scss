@@ -1,0 +1,18 @@
+// = require_self
+
+
+@import "bootstrap";
+@import "welcome";
+
+.notification {
+  background-color: #F5F5F8;
+  position: absolute;
+  border: #69696A solid 1px;
+  border-radius: 3px;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  z-index: 100;
+  top: 60px;
+  right: 17px;
+}

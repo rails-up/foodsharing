@@ -1,21 +1,17 @@
-.row
-  .col
-    = link_to t('common.back'), articles_path, class: 'btn'
-
-= form_for @article do |f|
-  = render 'common/errors', resource: @article
-  .row
-    .field.input-field.col.l6.s12
-      = f.label :status, class: 'active'
-      = f.select :status, Article.statuses.keys.to_a
-  .row
-    .field.input-field.col.s12
-      = f.label :title, class: 'active'
-      = f.text_field :title
-  .row
-    .field.input-field.col.s12
-      = f.label :content, class: 'active'
-      = f.text_area :content, class: 'materialize-textarea'
-  .row
-    .col
-      = f.submit t('.submit', action: @article.new_record? ? t('common.create') : t('common.update')), class: 'btn'
+div.container
+  div.row  
+    div.col-md-12
+      = form_for @article do |f|
+        = render 'common/errors', resource: @article
+        div.form-group
+          = f.label :status
+          = f.select :status, Article.statuses.keys.to_a, class: 'form-control'
+        div.form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control'
+        div.form-group
+          = f.label :content
+          = f.text_area :content, class: 'form-control'
+        div.form-group
+          = f.submit t('.submit', action: @article.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'
+          = link_to t('common.back'), articles_path, class: 'btn btn-outline-primary'

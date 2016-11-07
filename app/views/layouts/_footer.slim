@@ -1,24 +1,16 @@
-footer.page-footer.grey.darken-3 role="contentinfo"
-  .container
-    .row
-      .col.l6.s12
-        h5.white-text = t('.about_header') 
-        p.grey-text.text-lighten-4 = t('.about') 
-
-      .col.l3.s12
-        h5.white-text = t('.social_networks')
+footer
+  div.container
+    div.row
+      div.col-md-6
+        h5 = t('.about_header')
+        p = t('.about')
+      div.col-md-3
+        h5 = t('.social_networks')
         ul
-          li 
-            a.white-text href="https://vk.com/sharingfood" target="_blank"
-              |VK
-
-      .col.l3.s12
-        h5.white-text = t('.source_code')
-        a.gh-btn href="https://github.com/rails-up/foodsharing" target="_blank" 
-          span.gh-ico
-          span GitHub 
-
-  .footer-copyright.grey.darken-4
-    .container 
-      => t('.powered_by')
-      a.white-text href="http://materializecss.com" target="_blank" Materialize
+          li
+            a href="https://vk.com/sharingfood" target="_blank"
+              | VK
+      div.col-md-3
+        h5 = t('.source_code')
+        a href="https://github.com/rails-up/foodsharing" target="_blank"
+          span GitHub

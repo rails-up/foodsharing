@@ -7,7 +7,7 @@ module AcceptanceMacros
   end
 
   def sign_out
-    within("ul.hide-on-med-and-down") do
+    within("nav.navbar") do
       click_on t('layouts.navlink.sign_out')
     end
   end

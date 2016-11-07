@@ -1,13 +1,8 @@
-.parallax-container id="index-banner"
-  .section.no-pad-bot 
-    .container.glass
-      h1.header.center.orange-text = t('.project_name')
-      .row.center
-        h5.header.col.s12.light 
-          = t('.service_short_explain')
-      .row.center
-        = link_to t('.search'), donations_path, class: "btn-large waves-effect waves-light orange" 
-
-  .parallax 
-    img src="/images/banner.jpg" alt="Food"
-
+section.cover-image.video-section
+  div.test
+    a.player#bgndVideo data-property="{videoURL:'https://www.youtube.com/watch?v=95SNbn340TE',containment:'.video-section', quality:'large', autoPlay:true, mute:true, opacity:1}"
+  div.jumbotron.offset-md-2.col-md-8
+    h1.display-3.text-xs-center = t('.project_name')
+    p.lead.text-xs-center = t('.service_short_explain')
+    p.lead.text-xs-center
+      = link_to t('.search'), donations_path, class: "btn btn-success btn-lg" 
