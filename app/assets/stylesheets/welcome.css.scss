@@ -33,6 +33,10 @@
   padding-top: 30px;
 }
 
+main {
+  min-height: calc(100vh - 173px);
+}
+
 footer {
   padding-top: 30px;
   padding-bottom: 20px;
