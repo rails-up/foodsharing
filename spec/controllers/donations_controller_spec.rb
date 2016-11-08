@@ -161,7 +161,7 @@ RSpec.describe DonationsController, type: :controller do
       end
 
       it 'render to the show donation' do
-        expect(response).to redirect_to donation
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -221,7 +221,7 @@ RSpec.describe DonationsController, type: :controller do
 
       it 'render to the show donation' do
         destroy_donation
-        expect(response).to redirect_to donation
+        expect(response).to redirect_to root_path
       end
     end
   end

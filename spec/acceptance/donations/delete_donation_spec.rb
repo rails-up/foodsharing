@@ -7,10 +7,18 @@ feature 'Delete Donation', %q(
 
   given(:t_destroy) { t('common.destroy') }
   given(:user) { create :user }
+  given(:admin) { create :user, role: :admin }
   given(:donation) { create :donation, user: user }
   given(:donation_another_user) { create :donation }
 
-  describe 'Authenticated user' do
+  describe 'Unauthenticated user' do
+    scenario 'can not delete donation' do
+      visit donation_path(donation)
+      expect(page).to_not have_link t_destroy
+    end
+  end
+
+  describe 'Authenticated user without role' do
     before { sign_in user }
     scenario 'try to delete own donation' do
       visit donation_path(donation)
@@ -23,10 +31,12 @@ feature 'Delete Donation', %q(
     end
   end
 
-  describe 'Unauthenticated user' do
-    scenario 'can not delete donation' do
+  describe 'User with role :admin' do
+    before { sign_in admin }
+    scenario 'can delete donation another user' do
       visit donation_path(donation)
-      expect(page).to_not have_link t_destroy
+      click_on t_destroy
+      expect(page).to_not have_content donation.title
     end
   end
 end
