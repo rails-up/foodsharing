@@ -1,14 +1,14 @@
 div.row
   div.col-xs-12
-    = link_to t('common.back'), donations_path, class: 'btn' 
+    = link_to t('common.back'), donations_path, class: 'btn btn-outline-primary' 
 
     = form_for @donation do |f|
       = render 'common/errors', resource: @donation
       div.field-group
         = f.label :title
-        = f.text_field :title, class: 'group-control'
+        = f.text_field :title, class: 'form-control'
       div.field-group
         = f.label :description
-        = f.text_area :description, class: 'group-control'
+        = f.text_area :description, class: 'form-control'
       div.field-group
           = f.submit t('.submit', action: @donation.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'

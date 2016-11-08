@@ -1,7 +1,7 @@
 div.row
   div.col-xs-12
   
-    = link_to t('common.back'), donations_path, class: 'btn' 
+    = link_to t('common.back'), donations_path, class: 'btn btn-outline-primary' 
     
     h5 = donation.title
     
@@ -9,5 +9,5 @@ div.row
 .row
   .col
     - if user_signed_in?
-      =< link_to t('common.edit'), edit_donation_path(donation), class: 'btn' if current_user.can_update?(donation)
-      =< link_to t('common.destroy'), donation_path(donation), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn' if current_user.can_delete?(donation)
+      =< link_to t('common.edit'), edit_donation_path(donation), class: 'btn btn-primary' if current_user.can_update?(donation)
+      =< link_to t('common.destroy'), donation_path(donation), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn btn-danger' if current_user.can_delete?(donation)
