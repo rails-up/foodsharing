@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DonationsController, type: :controller do
   let(:user) { create :user }
+  let(:admin) { create :user, role: :admin }
   let(:another_user) { create :user }
   let(:donation) { create :donation, user: user }
 
@@ -126,7 +127,7 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'when user edit own donation' do
+    context 'when user without role, try edit own donation' do
       before { sign_in user }
 
       it 'assigns the requested donation to @donation' do
@@ -148,7 +149,7 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'when user edit donation another user' do
+    context 'when user without role, try edit donation another user' do
       before do
         sign_in another_user
         update_donation_attr
@@ -165,7 +166,7 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'then user edit donation with invalid attributes' do
+    context 'then user without role, try edit donation with invalid attributes' do
       before do
         sign_in user
         patch :update,
@@ -185,6 +186,28 @@ RSpec.describe DonationsController, type: :controller do
         expect(response).to render_template :edit
       end
     end
+
+    context 'when user with role :admin, try edit donation another user' do
+      before { sign_in admin }
+
+      it 'assigns the requested donation to @donation' do
+        update_donation
+        expect(assigns(:donation)).to eq donation
+      end
+
+      it 'change donation attributes' do
+        update_donation_attr
+        donation.reload
+        expect(donation.title).to eq 'edited title'
+        expect(donation.description).to eq 'edited description'
+      end
+
+      it 'render to the updated donation' do
+        update_donation
+        # expect(response).to render_template :update
+        expect(response).to redirect_to donation
+      end
+    end
   end
 
   describe 'DELETE #destroy' do
@@ -199,7 +222,7 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'when user authenticated' do
+    context 'when user without role, try delete own donation' do
       before { sign_in user }
 
       it 'delete donation' do
@@ -212,7 +235,7 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
 
-    context 'when user delete donation another user' do
+    context 'when user without role, try delete donation another user' do
       before { sign_in another_user }
 
       it 'does not delete donation' do
@@ -222,6 +245,19 @@ RSpec.describe DonationsController, type: :controller do
       it 'render to the show donation' do
         destroy_donation
         expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'when user with role :admin, try delete donation another user' do
+      before { sign_in admin }
+
+      it 'delete donation' do
+        expect { destroy_donation }.to change(Donation, :count).by(-1)
+      end
+
+      it 'redirect to index view' do
+        destroy_donation
+        expect(response).to redirect_to donations_path
       end
     end
   end
