@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_article, only: [:show, :edit, :update, :destroy]
-  before_action :check_access, only: [:edit, :update, :destroy]
+  before_action :authorize_article, only: [:edit, :update, :destroy]
   before_action :hide_not_published, only: [:show]
 
   def index
@@ -58,18 +58,24 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def check_access
-    not_allowed(articles_path) unless @article.user_id == current_user.id
-  end
-
   def hide_not_published
+
     return nil if @article.published?
-    return nil if user_signed_in? && @article.user_id == current_user.id
-    not_allowed(articles_path)
+    authorize_article
+    # return authorize_article if user_signed_in?
+    # byebug
+    # # authority_forbidden(error)
+    # raise Authority::SecurityViolation()
+    # # https://github.com/nathanl/authority/blob/master/lib/authority/security_violation.rb
   end
 
   def not_allowed(path)
     flash[:notice] = t('common.not_allowed')
     redirect_to path
   end
+
+  def authorize_article
+    authorize_action_for @article
+  end
+
 end
