@@ -4,10 +4,6 @@ class DonationAuthorizer < ApplicationAuthorizer
   # end
 
   # Instance method:
-  def editable_by?(user)
-    allow?(user)
-  end
-
   def updatable_by?(user)
     allow?(user)
   end
