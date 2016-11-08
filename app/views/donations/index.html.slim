@@ -3,6 +3,6 @@ div.row
 
     h3 = t('.title')
     - if user_signed_in?
-      p = link_to t('.new'), new_donation_path, class: 'btn'
+      p = link_to t('.new'), new_donation_path, class: 'btn btn-primary'
 
     = render partial: 'donations', collection: @donations, as: 'donation'
