@@ -18,6 +18,7 @@ feature 'Edit Donation', %q(
     #{t('activerecord.errors.messages.blank')}"
   end
   given(:user) { create :user }
+  given(:admin) { create :user, role: :admin }
   given(:donation) { create :donation, user: user }
   given(:donation_another_user) { create :donation }
 
@@ -28,7 +29,7 @@ feature 'Edit Donation', %q(
     end
   end
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user without role' do
     before { sign_in user }
 
     describe 'try to edit own donation' do
@@ -61,6 +62,21 @@ feature 'Edit Donation', %q(
         visit donation_path(donation_another_user)
         expect(page).to_not have_link t_edit
       end
+    end
+  end
+
+  describe 'User with role :admin' do
+    before { sign_in admin }
+    scenario 'can edit donation another user' do
+      visit donation_path(donation)
+      click_on t_edit
+      fill_in t_title, with: 'Admin edited donation title'
+      fill_in t_description, with: 'Admin edited donation description'
+      click_on t_submit
+      expect(page).to have_content 'Admin edited donation title'
+      expect(page).to have_content 'Admin edited donation description'
+      expect(page).to_not have_content donation.title
+      expect(page).to_not have_content donation.description
     end
   end
 end
