@@ -1,11 +1,10 @@
-.row
-  .col
+div.row
+  div.col-xs-12
+  
     = link_to t('common.back'), donations_path, class: 'btn' 
-.row
-  .col
+    
     h5 = donation.title
-.row    
-  .col   
+    
     = donation.description
 .row
   .col
