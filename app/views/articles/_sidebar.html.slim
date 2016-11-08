@@ -9,4 +9,4 @@ h5 Sidebar
   = link_to_my_articles(:draft) if current_user.editor?
   br
   br
-  = link_to t('.new'), new_article_path, class: 'btn btn-primary' if current_user.editor?
+  = link_to t('.new'), new_article_path, class: 'btn btn-primary' if current_user.can_create?(Article)
