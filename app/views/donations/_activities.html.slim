@@ -1,0 +1,10 @@
+.divider
+.section
+  - @activities.each do |activity|
+    p
+      => activity.user.full_name
+      => activity.action
+      => link_to activity.donation.title, donation_path(activity.donation)
+      = activity.recipient
+  end
+.divider

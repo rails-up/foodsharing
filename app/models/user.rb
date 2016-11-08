@@ -8,4 +8,5 @@ class User < ApplicationRecord
   enum role: [:visitor, :editor]
   has_many :articles
   has_many :donations, dependent: :destroy
+  has_many :activities, dependent: :destroy
 end

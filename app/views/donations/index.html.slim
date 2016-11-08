@@ -6,3 +6,4 @@ div.row
       p = link_to t('.new'), new_donation_path, class: 'btn btn-primary'
 
     = render partial: 'donations', collection: @donations, as: 'donation'
+    = render partial: 'activities' unless @activities.nil?
