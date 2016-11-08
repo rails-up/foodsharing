@@ -10,10 +10,14 @@ FactoryGirl.define do
   factory :article do
     title :article_title
     content :article_content
+    user
+    status :draft
   end
 
   factory :invalid_article, class: 'Article' do
     title nil
     content nil
+    user nil
+    status nil
   end
 end
