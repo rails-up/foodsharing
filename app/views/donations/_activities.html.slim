@@ -1,10 +1,13 @@
 .divider
 .section
   - @activities.each do |activity|
-    p
-      => activity.user.full_name
-      => activity.action
+    .time_ago
+      => time_ago_in_words activity.updated_at
+      = I18n.t(".activity.ago")
+    .activity
+      strong=> activity.user.full_name
+      => I18n.t(".activity.#{activity.action}")
       => link_to activity.donation.title, donation_path(activity.donation)
-      = activity.recipient
+      /= activity.recipient
   end
 .divider
