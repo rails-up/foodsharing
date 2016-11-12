@@ -6,24 +6,9 @@ class ArticlesController < ApplicationController
 
   def index
     my_articles = params[:my_articles]
-    if current_user.present? && Article.statuses.key?(my_articles)
-      if current_user.has_role? :admin
-        @articles = Article.where(status: my_articles)
-      else
-        @articles = Article.where(user_id: current_user.id, status: my_articles)
-      end
-    else
-      @articles = Article.where(status: :published)
-    end
-
-    # case params[:my_articles]
-    # when 'published'
-    #   current_user ? @articles = Article.where(user_id: current_user.id, status: :published) : not_allowed(articles_path)
-    # when 'draft'
-    #   current_user ? @articles = Article.where(user_id: current_user.id, status: :draft) : not_allowed(articles_path)
-    # else
-    #   @articles = Article.where(status: :published)
-    # end
+    return @articles = Article.published unless current_user.present? && Article.statuses.key?(my_articles)
+    return @articles = Article.where(status: my_articles) if current_user.has_role? :admin
+    @articles = Article.where(user_id: current_user.id, status: my_articles)
   end
 
   def show
