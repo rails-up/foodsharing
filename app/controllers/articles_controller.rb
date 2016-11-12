@@ -1,18 +1,29 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_article, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_article, only: [:edit, :update, :destroy]
-  before_action :hide_not_published, only: [:show]
+  before_action :authorize_article, only: [:show, :edit, :update, :destroy]
+  authorize_actions_for Article, only: [:new, :create]
 
   def index
-    case params[:my_articles]
-    when 'published'
-      current_user ? @articles = Article.where(user_id: current_user.id, status: :published) : not_allowed(articles_path)
-    when 'draft'
-      current_user ? @articles = Article.where(user_id: current_user.id, status: :draft) : not_allowed(articles_path)
+    my_articles = params[:my_articles]
+    if current_user.present? && Article.statuses.key?(my_articles)
+      if current_user.has_role? :admin
+        @articles = Article.where(status: my_articles)
+      else
+        @articles = Article.where(user_id: current_user.id, status: my_articles)
+      end
     else
       @articles = Article.where(status: :published)
     end
+
+    # case params[:my_articles]
+    # when 'published'
+    #   current_user ? @articles = Article.where(user_id: current_user.id, status: :published) : not_allowed(articles_path)
+    # when 'draft'
+    #   current_user ? @articles = Article.where(user_id: current_user.id, status: :draft) : not_allowed(articles_path)
+    # else
+    #   @articles = Article.where(status: :published)
+    # end
   end
 
   def show
@@ -58,24 +69,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def hide_not_published
-
-    return nil if @article.published?
-    authorize_article
-    # return authorize_article if user_signed_in?
-    # byebug
-    # # authority_forbidden(error)
-    # raise Authority::SecurityViolation()
-    # # https://github.com/nathanl/authority/blob/master/lib/authority/security_violation.rb
-  end
-
-  def not_allowed(path)
-    flash[:notice] = t('common.not_allowed')
-    redirect_to path
-  end
-
   def authorize_article
     authorize_action_for @article
   end
-
 end

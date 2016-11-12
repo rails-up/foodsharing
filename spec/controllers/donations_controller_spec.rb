@@ -242,7 +242,7 @@ RSpec.describe DonationsController, type: :controller do
         expect { destroy_donation }.to_not change(Donation, :count)
       end
 
-      it 'render to the show donation' do
+      it 'redirect to root' do
         destroy_donation
         expect(response).to redirect_to root_path
       end

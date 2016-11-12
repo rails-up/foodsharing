@@ -2,70 +2,58 @@ require_relative '../acceptance_helper'
 
 feature 'Delete Article', %q(
   In order to remove article
-  User with role :editor should be able to delete article
+  User with role :editor or :admin should be able to delete article
 ) do
 
-  let(:user) { create(:user) }
-  before {
-    user.editor!
-    sign_in user
-  }
-
   given(:t_destroy) { t('common.destroy') }
-  given(:article) { create :article, user: user, status: :published }
 
-  scenario 'try to delete article', js: true do
-    visit article_path(article)
-    page.accept_confirm do
-      click_on t_destroy
+  given(:user) { create :user }
+  given(:editor) { create :user, role: :editor }
+  given(:admin) { create :user, role: :admin }
+  given(:article) { create :article, user: editor }
+  given(:article_another_user) { create :article }
+
+  describe 'Unauthenticated user' do
+    scenario 'can not delete article' do
+      visit article_path(article)
+      expect(page).to_not have_link t_destroy
     end
-    expect(page).to_not have_content article.title
   end
 
-  scenario 'not logged user can not delete article' do
-    sign_out
-    visit article_path(article)
-    expect(page).to_not have_content t_destroy
-  end
-end
-
-feature 'User do not delete Article', %q(
-  In order to not give access to remove article
-  User without role :editor should not be able to delete article
-) do
-
-  let(:user) { create(:user) }
-  before do
-    user.visitor!
-    sign_in user
+  describe 'Authentitcated user without role' do
+    before { sign_in user }
+    scenario 'can not delete article' do
+      visit article_path(article)
+      expect(page).to_not have_link t_destroy
+    end
   end
 
-  given(:t_destroy) { t('common.destroy') }
-  given(:article) { create :article, user: user, status: :published }
+  describe 'Authentitcated user with role :editor' do
+    before { sign_in editor }
 
-  scenario 'user without role :editor can not delete article' do
-    visit article_path(article)
-    expect(page).to_not have_content t_destroy
-  end
-end
+    scenario 'can delete own article', js: true do
+      visit article_path(article)
+      page.accept_confirm do
+        click_on t_destroy
+      end
+      expect(page).to_not have_content article.title
+    end
 
-feature 'Delete own Article', %q(
-  In order to remove only own article
-  User with role :editor should not be able to delete other editors' articles
-) do
-  let(:user) { create(:user) }
-  let(:user2) { create(:user) }
-  before {
-    user.editor!
-    user2.editor!
-    sign_in user2
-  }
-  given(:t_destroy) { t('common.destroy') }
-  given(:article) { create :article, user: user, status: :published }
-
-  scenario 'user with role :editor should not be able to delete other users articles' do
-    visit article_path(article)
-    expect(page).to_not have_content t_destroy
+    scenario 'can not delete article another user' do
+      visit article_path(article_another_user)
+      expect(page).to_not have_link t_destroy
+    end
   end
 
+  describe 'Authentitcated user with role :admin' do
+    before { sign_in admin }
+
+    scenario 'can delete any article', js: true do
+      visit article_path(article)
+      page.accept_confirm do
+        click_on t_destroy
+      end
+      expect(page).to_not have_content article.title
+    end
+  end
 end
