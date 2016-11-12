@@ -4,7 +4,7 @@ class ArticleAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(user)
-    allow?(user)
+    resource.published? || allow?(user)
   end
 
   def updatable_by?(user)

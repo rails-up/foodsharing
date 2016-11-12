@@ -12,19 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authority_forbidden(error)
-    Authority.logger.warn(error.message)
-    if user_signed_in?
-      flash[:alert] = "Not authorized to view this page"
-      session[:user_return_to] = nil
-      redirect_to root_url
-    else
-      flash[:alert] = "You must first login to view this page"
-      session[:user_return_to] = request.url
-      redirect_to new_user_session_path
-    end
-
     # Authority.logger.warn(error.message)
-    # redirect_to request.referrer.presence || root_path, alert: t('common.not_allowed')
+    redirect_to request.referrer.presence || root_path, alert: t('common.not_allowed')
   end
 
   def auth_current_user
