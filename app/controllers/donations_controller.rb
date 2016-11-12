@@ -3,15 +3,10 @@ class DonationsController < ApplicationController
   before_action :load_donation, only: [:show, :edit, :update, :destroy]
   before_action :authorize_donation, only: [:edit, :update, :destroy]
   # authorize_actions_for Donation, except: [:show, :index]
+  before_action :set_activities, only: [:index]
 
   def index
     @donations = Donation.all
-    if user_signed_in?
-      @activities = Activity
-                      .where(recipient: [current_user.role, 'all'])
-                      .limit(5)
-                      .order(created_at: :desc)
-    end
   end
 
   def show
@@ -27,7 +22,6 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params.merge(user: current_user))
     if @donation.save
-      create_action('visitor', action_name, @donation)
       redirect_to @donation
     else
       render :new
@@ -36,7 +30,6 @@ class DonationsController < ApplicationController
 
   def update
     if @donation.update(donation_params)
-      create_action('all', action_name, @donation)
       redirect_to @donation
     else
       render :edit
@@ -62,11 +55,13 @@ class DonationsController < ApplicationController
     authorize_action_for @donation
   end
 
-  def create_action(to, action, donation)
-    activity = current_user.activities.build
-    activity.recipient = to
-    activity.action = action
-    activity.donation = donation
-    activity.save
+  def set_activities
+    if user_signed_in?
+      @activities = Activity
+        .where(recipient: [current_user.role, 'all'])
+        .order(created_at: :desc)
+        .limit(10)
+    end
   end
+
 end
