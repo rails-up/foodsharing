@@ -8,8 +8,13 @@ feature 'Create Donation', %q(
   given(:t_new) { t('donations.index.new') }
   given(:t_title) { t('activerecord.attributes.donation.title') }
   given(:t_description) { t('activerecord.attributes.donation.description') }
+  given(:t_special) { t('activerecord.attributes.donation.special') }
   given(:t_submit) { t('donations.form.submit', action: t('common.create')) }
   given(:user) { create(:user) } # FactoryGirl.create
+  given(:cafe) { create(:user, role: :cafe) }
+  given(:volunteer) { create(:user, role: :volunteer) }
+  given(:editor) { create(:user, role: :editor) }
+  given(:admin) { create(:user, role: :admin) }
 
   describe 'Unauthenticated user' do
     scenario 'can not creates donation' do
@@ -18,7 +23,7 @@ feature 'Create Donation', %q(
     end
   end
 
-  describe 'Authenticated user' do
+  describe 'Authentitcated user without role' do
     before do
       sign_in user
       visit donations_path
@@ -43,6 +48,59 @@ feature 'Create Donation', %q(
       #{t('activerecord.errors.messages.blank')}"
       expect(page).to have_content "#{t('activerecord.attributes.donation.description')}
       #{t('activerecord.errors.messages.blank')}"
+    end
+
+    scenario 'do not create special donation' do
+      click_on t_new
+      expect(page).to_not have_content t_special
+    end
+  end
+
+  describe 'Authentitcated user with role :cafe' do
+    scenario 'try create special donation' do
+      sign_in cafe
+      visit donations_path
+      click_on t_new
+      fill_in t_title, with: 'New donation title'
+      fill_in t_description, with: 'New donation description'
+      check t_special
+      click_on t_submit
+      expect(page).to have_content 'New donation title'
+      expect(page).to have_content 'New donation description'
+      expect(page).to have_content t_special
+    end
+  end
+
+  describe 'Authentitcated user with role :admin' do
+    scenario 'try create special donation' do
+      sign_in admin
+      visit donations_path
+      click_on t_new
+      fill_in t_title, with: 'New donation title'
+      fill_in t_description, with: 'New donation description'
+      check t_special
+      click_on t_submit
+      expect(page).to have_content 'New donation title'
+      expect(page).to have_content 'New donation description'
+      expect(page).to have_content t_special
+    end
+  end
+
+  describe 'Authentitcated user with role :editor' do
+    scenario 'do not create special donation' do
+      sign_in editor
+      visit donations_path
+      click_on t_new
+      expect(page).to_not have_content t_special
+    end
+  end
+
+  describe 'Authentitcated user with role :volunteer' do
+    scenario 'do not create special donation' do
+      sign_in volunteer
+      visit donations_path
+      click_on t_new
+      expect(page).to_not have_content t_special
     end
   end
 end

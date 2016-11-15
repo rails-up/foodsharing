@@ -10,5 +10,11 @@ div.row
       div.field-group
         = f.label :description
         = f.text_area :description, class: 'form-control'
+      / # - if current_user.can_specialize?(Donation, {action_name: action_name})
+      - if current_user.can_specialize?(Donation)
+        div.field-group
+          = f.label :special
+          = f.check_box :special, class: 'form-control'
+
       div.field-group
           = f.submit t('.submit', action: @donation.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'

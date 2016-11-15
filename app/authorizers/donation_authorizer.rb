@@ -1,9 +1,11 @@
 class DonationAuthorizer < ApplicationAuthorizer
-  # def self.creatable_by?(user)
-  #   user.manager?
-  # end
+  def self.specializable_by?(user)
+    user.has_role?(:cafe) || user.has_role?(:admin)
+    # return (user.has_role?(:cafe) || user.has_role?(:admin))
+    #   if [:new, :create, :edit, :update].include? key[:action_name].to_sym
+    # false
+  end
 
-  # Instance method:
   def updatable_by?(user)
     allow?(user)
   end

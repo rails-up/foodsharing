@@ -8,6 +8,7 @@ ru:
       donation:
         title: "Заголовок"
         description: "Описание"
+        special: "Спецпредложение"
       user:
         email: "Электронная почта"
         password: "Пароль"
