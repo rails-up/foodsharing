@@ -45,6 +45,13 @@ Authority.configure do |config|
   #   :update => 'updatable',
   #   :delete => 'deletable'
   # }
+  config.abilities = {
+    create:     'creatable',
+    read:       'readable',
+    update:     'updatable',
+    delete:     'deletable',
+    specialize: 'specializable'
+  }
 
   # LOGGER
   # ======

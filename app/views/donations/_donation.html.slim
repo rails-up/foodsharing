@@ -4,6 +4,8 @@ div.row
     = link_to t('common.back'), donations_path, class: 'btn btn-outline-primary' 
     
     h5 = donation.title
+    - if donation.special?
+      h6 = t('activerecord.attributes.donation.special') 
     
     = donation.description
 .row
