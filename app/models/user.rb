@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :full_name, presence: true
   has_many :articles
   has_many :donations, dependent: :destroy
+  belongs_to :company
 end
