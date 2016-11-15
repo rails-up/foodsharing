@@ -82,3 +82,11 @@ ru:
       title: "Статья"
     form:
       submit: "%{action} статью"
+
+  devise:
+    registrations:
+      edit:
+        company_details: "Данные о компании"
+        company_name: "Название компании"
+        company_phone: "Телефон"
+        company_address: "Адрес"
