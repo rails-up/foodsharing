@@ -1,11 +1,16 @@
 class DonationsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :load_donation, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_donation, only: [:edit, :update, :destroy]
+  before_action :authorize_donation, only: [:show, :edit, :update, :destroy]
   # authorize_actions_for Donation, only: [:new, :create]
 
   def index
-    @donations = Donation.all
+    # return @donations = Donation.all if current_user && current_user.can_specialize?(Donation)
+    if Donation.specializable_by?(current_user || User.new)
+      @donations = Donation.all
+    else
+      @donations = Donation.where(special: false)
+    end
   end
 
   def show
