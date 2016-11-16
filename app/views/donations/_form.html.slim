@@ -10,8 +10,8 @@ div.row
       div.field-group
         = f.label :description
         = f.text_area :description, class: 'form-control'
-      / # - if current_user.can_specialize?(Donation, {action_name: action_name})
-      - if current_user.can_specialize?(Donation)
+
+      - if current_user.can_specialize?(Donation, action_name)
         div.field-group
           = f.label :special
           = f.check_box :special, class: 'form-control'

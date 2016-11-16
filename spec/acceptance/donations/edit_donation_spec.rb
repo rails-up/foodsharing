@@ -8,6 +8,7 @@ feature 'Edit Donation', %q(
   given(:t_edit) { t('common.edit') }
   given(:t_title) { t('activerecord.attributes.donation.title') }
   given(:t_description) { t('activerecord.attributes.donation.description') }
+  given(:t_special) { t('activerecord.attributes.donation.special') }
   given(:t_submit) { t('donations.form.submit', action: t('common.edit')) }
   given(:t_title_eror) do
     "#{t('activerecord.attributes.donation.title')}
@@ -17,9 +18,16 @@ feature 'Edit Donation', %q(
     "#{t('activerecord.attributes.donation.description')}
     #{t('activerecord.errors.messages.blank')}"
   end
-  given(:user) { create :user }
-  given(:admin) { create :user, role: :admin }
+  given(:user) { create(:user) } # FactoryGirl.create
+  given(:cafe) { create(:user, role: :cafe) }
+  given(:volunteer) { create(:user, role: :volunteer) }
+  given(:editor) { create(:user, role: :editor) }
+  given(:admin) { create(:user, role: :admin) }
+
   given(:donation) { create :donation, user: user }
+  given(:editor_donation) { create :donation, user: editor }
+  given(:cafe_donation) { create :donation, user: cafe }
+  given(:volunteer_donation) { create :donation, user: volunteer }
   given(:donation_another_user) { create :donation }
 
   describe 'Unauthenticated user' do
@@ -55,6 +63,10 @@ feature 'Edit Donation', %q(
         expect(page).to have_content t_title_eror
         expect(page).to have_content t_description_eror
       end
+
+      scenario 'do not make a special donation' do
+        expect(page).to_not have_content t_special
+      end
     end
 
     describe 'can not edit donation another user' do
@@ -62,6 +74,35 @@ feature 'Edit Donation', %q(
         visit donation_path(donation_another_user)
         expect(page).to_not have_link t_edit
       end
+    end
+  end
+
+  describe 'User with role :editor' do
+    before { sign_in editor }
+    scenario 'do not make a special donation' do
+      visit donation_path(editor_donation)
+      click_on t_edit
+      expect(page).to_not have_content t_special
+    end
+  end
+
+  describe 'User with role :volunteer' do
+    before { sign_in volunteer }
+    scenario 'do not make a special donation' do
+      visit donation_path(volunteer_donation)
+      click_on t_edit
+      expect(page).to_not have_content t_special
+    end
+  end
+
+  describe 'User with role :cafe' do
+    before { sign_in cafe }
+    scenario 'can make a special donation' do
+      visit donation_path(cafe_donation)
+      click_on t_edit
+      check t_special
+      click_on t_submit
+      expect(page).to have_content t_special
     end
   end
 
@@ -77,6 +118,14 @@ feature 'Edit Donation', %q(
       expect(page).to have_content 'Admin edited donation description'
       expect(page).to_not have_content donation.title
       expect(page).to_not have_content donation.description
+    end
+
+    scenario 'can make a special donation' do
+      visit donation_path(donation)
+      click_on t_edit
+      check t_special
+      click_on t_submit
+      expect(page).to have_content t_special
     end
   end
 end
