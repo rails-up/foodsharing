@@ -1,9 +1,8 @@
 class DonationAuthorizer < ApplicationAuthorizer
-  def self.specializable_by?(user)
-    user.has_role?(:cafe) || user.has_role?(:volunteer) || user.has_role?(:admin)
-    # return (user.has_role?(:cafe) || user.has_role?(:admin))
-    #   if [:new, :create, :edit, :update].include? key[:action_name].to_sym
-    # false
+  def self.specializable_by?(user, key)
+    return (user.has_role?(:cafe) || user.has_role?(:admin)) if [:new, :create, :edit, :update].include? key.to_sym
+    return (user.has_role?(:cafe) || user.has_role?(:volunteer) || user.has_role?(:admin)) if :index == key.to_sym
+    false
   end
 
   def readable_by?(user)

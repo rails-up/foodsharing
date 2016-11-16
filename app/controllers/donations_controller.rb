@@ -5,8 +5,7 @@ class DonationsController < ApplicationController
   # authorize_actions_for Donation, only: [:new, :create]
 
   def index
-    # return @donations = Donation.all if current_user && current_user.can_specialize?(Donation)
-    if Donation.specializable_by?(current_user || User.new)
+    if current_user.present? && current_user.can_specialize?(Donation, action_name)
       @donations = Donation.all
     else
       @donations = Donation.where(special: false)
