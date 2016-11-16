@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'associations for ...' do
     it { should have_many(:donations).dependent(:destroy) }
+    it { should have_one(:company).dependent(:destroy) }
   end
 
   describe 'validates presence of ...' do
