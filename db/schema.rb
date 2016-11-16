@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115040913) do
+ActiveRecord::Schema.define(version: 20161113145346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,14 +22,6 @@ ActiveRecord::Schema.define(version: 20161115040913) do
     t.integer  "user_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-  end
-
-  create_table "companies", force: :cascade do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "donations", force: :cascade do |t|
@@ -73,8 +65,6 @@ ActiveRecord::Schema.define(version: 20161115040913) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "company_id"
-    t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -88,5 +78,4 @@ ActiveRecord::Schema.define(version: 20161115040913) do
   end
 
   add_foreign_key "donations", "users"
-  add_foreign_key "users", "companies"
 end

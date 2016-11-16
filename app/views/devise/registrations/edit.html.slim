@@ -3,7 +3,7 @@ div.container
     div.offset-md-3.col-md-6
 
       h2
-        = t('devise.common.edit_account')
+        = t('devise.common.edit_account') 
         / = resource_name.to_s.humanize
       = form_for(resource, as: resource_name, url: registration_path(resource_name), 
         html: { method: :put }) do |f|
@@ -18,35 +18,23 @@ div.container
           div.form-group
             = t('.waiting_confirmation_for') 
             = resource.unconfirmed_email
-        div.form-group
-          = f.label :password
-          = f.password_field :password, autocomplete: "off"
-          em
-            | (
-            = t('.leave_blank')
-            | )
-        div.form-group
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation, autocomplete: "off"
-        div.form-group
-          = f.label :current_password
-          = f.password_field :current_password, autocomplete: "off"
-          em
-            | (
-            = t('.need_current_password')
-            | )
-        div.company_fields
-          h5= t('.company_details')
-          = f.fields_for :company do |company_form|
-            div.form-group
-              = company_form.label t('.company_name')
-              = company_form.text_field :name
-            div.form-group
-              = company_form.label t('.company_phone')
-              = company_form.text_field :phone
-            div.form-group
-              = company_form.label t('.company_address')
-              = company_form.text_field :address
+          div.form-group
+            = f.label :password
+            = f.password_field :password, autocomplete: "off"
+            em
+              | (
+              = t('.leave_blank')
+              | )        
+          div.form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autocomplete: "off"
+          div.form-group
+            = f.label :current_password
+            = f.password_field :current_password, autocomplete: "off"
+            em
+              | (
+              = t('.need_current_password')
+              | ) 
         .actions
           = f.submit t('.update'), class: "btn"
       h3
