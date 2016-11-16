@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :articles
 
   resources :donations
+  resources :companies
 end
