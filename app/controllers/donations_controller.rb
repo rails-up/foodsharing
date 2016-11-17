@@ -1,8 +1,7 @@
 class DonationsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :load_donation, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_donation, only: [:show, :edit, :update, :destroy]
-  # authorize_actions_for Donation, only: [:new, :create]
+  before_action :authorize_donation, only: [:show, :edit, :destroy]
 
   def index
     if current_user.present? && current_user.can_specialize?(Donation, action_name)
@@ -24,6 +23,7 @@ class DonationsController < ApplicationController
 
   def create
     @donation = Donation.new(donation_params.merge(user: current_user))
+    authorize_donation
     if @donation.save
       redirect_to @donation
     else
@@ -32,6 +32,8 @@ class DonationsController < ApplicationController
   end
 
   def update
+    @donation.attributes = donation_params
+    authorize_donation
     if @donation.update(donation_params)
       redirect_to @donation
     else
