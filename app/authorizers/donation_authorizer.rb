@@ -5,6 +5,11 @@ class DonationAuthorizer < ApplicationAuthorizer
     false
   end
 
+  def creatable_by?(user)
+    return (user.has_role?(:cafe) || user.has_role?(:admin)) if resource.special?
+    true
+  end
+
   def readable_by?(user)
     return (user.has_role?(:cafe) || user.has_role?(:volunteer) || user.has_role?(:admin)) if resource.special?
     true
@@ -21,6 +26,10 @@ class DonationAuthorizer < ApplicationAuthorizer
   private
 
   def allow?(user)
-    resource.user == user || user.has_role?(:admin)
+    # return (user.has_role?(:cafe) || user.has_role?(:admin)) if resource.special?
+    # resource.user == user || user.has_role?(:admin)
+
+    return resource.user == user || user.has_role?(:admin) unless resource.special?
+    resource.user == user && user.has_role?(:cafe) || user.has_role?(:admin)
   end
 end
