@@ -26,9 +26,6 @@ class DonationAuthorizer < ApplicationAuthorizer
   private
 
   def allow?(user)
-    # return (user.has_role?(:cafe) || user.has_role?(:admin)) if resource.special?
-    # resource.user == user || user.has_role?(:admin)
-
     return resource.user == user || user.has_role?(:admin) unless resource.special?
     resource.user == user && user.has_role?(:cafe) || user.has_role?(:admin)
   end
