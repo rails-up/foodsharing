@@ -15,16 +15,19 @@ RSpec.describe ArticlesController, type: :controller do
 
     context 'when user unauthenticated' do
       it 'populates an array of all published articles' do
+        published_articles
         get :index
         expect(assigns(:articles)).to match_array(published_articles)
       end
 
       it 'renders index view' do
+        published_articles
         get :index
         expect(response).to render_template :index
       end
 
       it 'no populates an array of all draft articles' do
+        draft_articles
         get :index, params: { my_articles: :draft }
         expect(assigns(:articles)).to_not match_array(draft_articles)
       end
@@ -33,6 +36,7 @@ RSpec.describe ArticlesController, type: :controller do
     context 'when user have not role' do
       it 'no populates an array of all draft articles' do
         sign_in user
+        draft_articles
         get :index, params: { my_articles: :draft }
         expect(assigns(:articles)).to_not match_array(draft_articles)
       end
@@ -42,6 +46,7 @@ RSpec.describe ArticlesController, type: :controller do
       before { sign_in editor }
       context 'is owner articles' do
         it 'populates an array of all draft articles' do
+          draft_articles
           get :index, params: { my_articles: :draft }
           expect(assigns(:articles)).to match_array(draft_articles)
         end
@@ -49,6 +54,7 @@ RSpec.describe ArticlesController, type: :controller do
 
       context 'is not owner articles' do
         it 'no populates an array of all draft articles' do
+          articles_another_user
           get :index, params: { my_articles: :draft }
           expect(assigns(:articles)).to_not match_array(articles_another_user)
         end
@@ -58,6 +64,7 @@ RSpec.describe ArticlesController, type: :controller do
     context 'when user has role :admin' do
       it 'populates an array of all draft articles' do
         sign_in admin
+        articles_another_user
         get :index, params: { my_articles: :draft }
         expect(assigns(:articles)).to match_array(articles_another_user)
       end
