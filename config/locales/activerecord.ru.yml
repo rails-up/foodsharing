@@ -19,6 +19,10 @@ ru:
       article:
         title: "Заголовок"
         content: "Содержание"
+      company:
+        name: "Название"
+        phone: "Телефонный номер"
+        address: "Почтовый адрес"
     errors:
       messages:
         blank: "- поле не должно быть пустым"
