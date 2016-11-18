@@ -82,3 +82,7 @@ ru:
       title: "Статья"
     form:
       submit: "%{action} статью"
+
+  companies:
+    new:
+      title: "Сведения об организации"

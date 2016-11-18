@@ -1,0 +1,14 @@
+.form-group
+  = form_for @company do |f|
+    = render 'common/errors', resource: @company
+    div.form-group
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
+    div.form-group
+      = f.label :phone
+      = f.text_field :phone, class: 'form-control'
+    div.form-group
+      = f.label :address
+      = f.text_area :address, class: 'form-control'
+    div.form-group
+        = f.submit 'Sumbit', class: 'btn btn-primary'
