@@ -7,7 +7,6 @@ class CompaniesController < ApplicationController
   def create
     @user = User.find(session[:user_id])
     @company = @user.build_company(companies_params)
-    @user.add_role(:cafe)
     if @company.save
       redirect_to root_path
       session[:user_id] = nil
