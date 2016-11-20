@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   def new
-    @user = User.find(session[:user_id])
+    @user = User.find(current_user || session[:user_id])
     @company = @user.build_company
   end
 
