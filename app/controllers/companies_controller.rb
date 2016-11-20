@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :load_user, only: [:new, :create]
-  before_action :load_company, only: [:edit, :update]
+  before_action :load_company, only: [:edit, :update, :destroy]
 
   def new
     @company = @user.build_company
@@ -25,6 +25,11 @@ class CompaniesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @company.destroy
+    redirect_to edit_user_registration_path
   end
 
   private
