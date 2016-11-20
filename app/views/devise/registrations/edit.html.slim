@@ -1,6 +1,6 @@
-div.container
-  div.row  
-    div.offset-md-3.col-md-6
+.container
+  .row
+    .offset-md-3.col-md-6
 
       h2
         = t('devise.common.edit_account') 
@@ -8,42 +8,51 @@ div.container
       = form_for(resource, as: resource_name, url: registration_path(resource_name), 
         html: { method: :put }) do |f|
         = devise_error_messages!
-        div.form-group
+        .form-group
           = f.label :full_name 
-          = f.text_field :full_name, autofocus: true
-        div.form-group
+          = f.text_field :full_name, autofocus: true, class: 'form-control'
+        .form-group
           = f.label :email
-          = f.email_field :email
+          = f.email_field :email, class: 'form-control'
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          div.form-group
+          .form-group
             = t('.waiting_confirmation_for') 
             = resource.unconfirmed_email
-          div.form-group
-            = f.label :password
-            = f.password_field :password, autocomplete: "off"
-            em
-              | (
-              = t('.leave_blank')
-              | )        
-          div.form-group
-            = f.label :password_confirmation
-            = f.password_field :password_confirmation, autocomplete: "off"
-          div.form-group
-            = f.label :current_password
-            = f.password_field :current_password, autocomplete: "off"
-            em
-              | (
-              = t('.need_current_password')
-              | ) 
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", class: 'form-control'
+          em
+            | (
+            = t('.leave_blank')
+            | )
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+        .form-group
+          = f.label :current_password
+          = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+          em
+            | (
+            = t('.need_current_password')
+            | )
         .actions
-          = f.submit t('.update'), class: "btn"
-      h3
+          = f.submit t('.update'), class: "btn btn-primary"
+      br
+      h2 = t('.company_section')
+      - if resource.company.nil?
+        .actions
+          = link_to t('.add_company_link'), new_company_path, class: "btn btn-success"
+      - else
+        .actions
+          = link_to t('.edit_company_link'), company_path(resource.company), class: "btn btn-warning"
+      br
+      h2
         = t('devise.common.cancel_account')
       p
         = t('.unhappy') 
         = button_to t('.cancel_account'), registration_path(resource_name), 
           data: { confirm: "#{t('.confirm')}" }, 
           method: :delete,
-          class: "btn"
+          class: "btn btn-danger"
       br
       = link_to t('devise.common.back'), :back
