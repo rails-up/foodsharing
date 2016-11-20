@@ -46,10 +46,11 @@ ru:
       new:
         checkbox_company: "Я представитель организации (кафе, ресторана)"
       edit:
-        company_section: "Сведения о компании"
+        company_section: "Сведения об организации"
         add_company_link: "Добавить"
         edit_company_link: "Изменить"
-        company_name: "Название компании:"
+        company_name: "Название организации:"
+        confirm_delete_company: "Вы уверены что хотите удалить организацию?"
     sessions:
       signed_in: "Вход в систему выполнен."
       signed_out: "Выход из системы выполнен."

@@ -47,6 +47,9 @@
         = resource.company.name
         .actions
           = link_to t('.edit_company_link'), edit_company_path(resource.company), class: "btn btn-warning"
+          = link_to t('common.destroy'), company_path(resource.company), method: :delete,
+                  data: { confirm: t('.confirm_delete_company') },
+                  class: "btn btn-danger"
       br
       h2
         = t('devise.common.cancel_account')
