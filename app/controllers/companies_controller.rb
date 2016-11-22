@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_user, only: [:new, :create]
   before_action :load_company, only: [:edit, :update, :destroy]
   before_action :authorize_company, only: [:edit, :update, :destroy]
@@ -37,7 +38,7 @@ class CompaniesController < ApplicationController
   private
 
   def load_user
-    @user = User.find(current_user || session[:user_id])
+    @user = User.find(current_user.id || session[:user_id])
   end
 
   def load_company
