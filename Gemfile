@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim-rails'
 gem 'devise'
 gem 'omniauth'
+gem 'omniauth-vkontakte'
 gem 'authority'
 gem 'rolify'
 

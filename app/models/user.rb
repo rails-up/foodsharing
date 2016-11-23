@@ -3,7 +3,8 @@ class User < ApplicationRecord
   include Authority::UserAbilities # can_update?
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :lockable, :timeoutable, :omniauthable
+         :confirmable, :lockable, :timeoutable, :omniauthable,
+         omniauth_providers: [:vkontakte]
 
   validates :full_name, presence: true
   has_many :articles

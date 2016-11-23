@@ -11,6 +11,7 @@ ru:
       characters_minimum: 'символов минимум' # characters minimum
       did_not_receive_confirmation_instructions: 'Не получили инструкцию по подтверждению регистрации?' # Didn't receive confirmation instructions?
       did_not_receive_unlock_instructions: 'Не получили инструкцию по разблокировке?' # Didn't receive unlock instructions?
+      omniauth_sign_in: 'Вход через' # Sign in with ...
 
     sessions:
       new:
