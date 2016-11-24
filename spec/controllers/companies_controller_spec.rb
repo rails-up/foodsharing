@@ -131,11 +131,9 @@ RSpec.describe CompaniesController, type: :controller do
     end
 
     context 'when user has role :admin' do
-      context 'when company is special' do
-        it 'saves new company in the database' do
-          sign_in admin
-          expect { subject }.to change(Company, :count).by(1)
-        end
+      it 'saves new company in the database' do
+        sign_in admin
+        expect { subject }.to change(Company, :count).by(1)
       end
     end
   end
@@ -224,7 +222,7 @@ RSpec.describe CompaniesController, type: :controller do
           expect(company.address).to_not eq 'Test Street, 123'
         end
 
-        it 'redirects to the show company' do
+        it 'redirects to the root path' do
           expect(response).to redirect_to root_path
         end
       end

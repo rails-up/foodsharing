@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Company, type: :model do
   let(:user) { create(:user) }
-  let(:company) { create(:company, user: user) }
+  let!(:company) { create(:company, user: user) }
   let(:invalid_company) { build(:invalid_company) }
 
   describe 'associations for ...' do
@@ -10,7 +10,6 @@ RSpec.describe Company, type: :model do
   end
 
   describe 'validates presence of ...' do
-    subject { create(:company, user: user) }
     it { should validate_uniqueness_of :name }
     it { should validate_presence_of :name }
     it { should validate_presence_of :phone }
