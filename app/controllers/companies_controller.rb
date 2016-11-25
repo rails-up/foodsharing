@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :load_user, only: [:new, :create]
   before_action :load_company, only: [:edit, :update, :destroy]
   before_action :authorize_company, only: [:edit, :update, :destroy]
@@ -10,10 +10,9 @@ class CompaniesController < ApplicationController
 
   def create
     @company = @user.build_company(companies_params)
-    authorize_company
     if @company.save
-      redirect_to edit_user_registration_path
       session[:user_id] = nil
+      redirect_to edit_user_registration_path
     else
       render :new
     end
@@ -38,7 +37,9 @@ class CompaniesController < ApplicationController
   private
 
   def load_user
-    @user = User.find(current_user.id || session[:user_id])
+    return @user = User.find(current_user.id) unless current_user.nil?
+    return @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    redirect_to user_session_path
   end
 
   def load_company

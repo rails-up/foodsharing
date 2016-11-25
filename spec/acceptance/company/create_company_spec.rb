@@ -50,7 +50,6 @@ feature 'Create Company', %q(
       expect(page).to have_content t_section_company_name
       expect(page).to have_link(t_edit_company_link)
       expect(page).to have_link(t_delete_company_link)
-      # expect(current_path).to eq donation_path(Donation.all.take)
     end
 
     scenario 'tries to create invalid company' do
