@@ -7,6 +7,7 @@ RSpec.describe DonationsController, type: :controller do
   let(:volunteer) { create :user, role: :volunteer }
   let(:admin) { create :user, role: :admin }
   let(:another_user) { create :user }
+  let(:city) { create :city }
 
   let(:donation) { create :donation, user: user }
   let(:cafe_donation) { create :donation, user: cafe, special: true }

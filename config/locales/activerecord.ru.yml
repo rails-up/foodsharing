@@ -4,11 +4,13 @@ ru:
       donation: "Предложение"
       user: "Пользователь"
       article: "Статья"
+      city: "Город"
     attributes:
       donation:
         title: "Заголовок"
         description: "Описание"
         special: "Спецпредложение"
+        city: "Город"
       user:
         email: "Электронная почта"
         password: "Пароль"
@@ -39,3 +41,8 @@ ru:
               taken: "- пользователь с таким email уже зарегистрирован"
             full_name:
               blank: "- имя не может быть пустым"
+        donation:
+          attributes:
+            city:
+              required:
+                "- обязательное поле"

@@ -6,6 +6,8 @@ div.row
     h5 = donation.title
     - if donation.special?
       h6 = t('activerecord.attributes.donation.special') 
+      
+    h3 = donation.city.name
     
     = donation.description
 .row

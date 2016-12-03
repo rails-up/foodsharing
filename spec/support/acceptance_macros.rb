@@ -11,4 +11,8 @@ module AcceptanceMacros
       click_on t('layouts.navlink.sign_out')
     end
   end
+
+  def create_cities
+    FactoryGirl.create_list(:city, 5)
+  end
 end

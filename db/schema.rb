@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126154816) do
+ActiveRecord::Schema.define(version: 20161203115758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 20161126154816) do
     t.index ["user_id"], name: "index_authorizations_on_user_id", using: :btree
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
@@ -46,10 +52,13 @@ ActiveRecord::Schema.define(version: 20161126154816) do
   create_table "donations", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "user_id"
-    t.boolean  "special",     default: false, null: false
+    t.boolean  "special",          default: false, null: false
+    t.string   "city"
+    t.string   "metro_station_id"
+    t.integer  "city_id"
     t.index ["user_id"], name: "index_donations_on_user_id", using: :btree
   end
 
