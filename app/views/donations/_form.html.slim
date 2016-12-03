@@ -6,7 +6,9 @@ div.row
       = render 'common/errors', resource: @donation
       div.field-group
         = f.label :city
-        = f.collection_select :city_id, City.all, :id, :name, include_blank: true, class: 'form-control'
+        = f.collection_select :city_id, City.all, :id, :name, {prompt: "Select a category"}, {class: "form-control city-select"}
+      div.field-group#stations
+        there should be a metro
       div.field-group
         = f.label :title
         = f.text_field :title, class: 'form-control'

@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
   resources :donations
   resources :companies, except: [:index, :show]
+
+  resources :cities, only: [:index] do
+    get :subway
+  end
 end
