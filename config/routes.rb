@@ -10,4 +10,9 @@ Rails.application.routes.draw do
 
   resources :donations
   resources :companies, except: [:index, :show]
+
+  #Admin
+  namespace :admin do
+    get "/", to: "admin#dashboard", as: "dashboard"
+  end
 end
