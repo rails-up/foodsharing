@@ -1,0 +1,33 @@
+@import "bootstrap";
+
+nav.navbar {
+  height: 60px;
+  padding: 0;
+  line-height: 46px;
+  border-bottom: 1px solid #EBEFF3;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  padding-top: 6px;
+}
+.navbar-light .navbar-brand {
+  color: #F15125;
+}
+
+.nav.navbar-nav > li.nav-item {
+  border-left: 1px solid #EBEFF3;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0;
+  &:hover {
+    background-color: #EBEFF3;
+  }
+}
+
+/* min height for main section (for sticky footer) */
+
+main {
+  min-height: calc(100vh - 173px);
+  margin-top: 60px;
+}
