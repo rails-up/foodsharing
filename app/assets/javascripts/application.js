@@ -15,4 +15,4 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
+//= require_directory .
