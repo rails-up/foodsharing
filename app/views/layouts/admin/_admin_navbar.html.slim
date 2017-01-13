@@ -1,9 +1,13 @@
 nav.navbar.navbar-light.bg-faded.navbar-fixed-top
   button.navbar-toggler.hidden-sm-up type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
-  div.collapse.navbar-toggleable-xs id="navbarResponsive"
+  .collapse.navbar-toggleable-xs id="navbarResponsive"
     = link_to 'Foodsharing admin area', admin_dashboard_path, class: 'navbar-brand'
-    div.float-sm-right
+    .float-sm-right
       ul.nav.navbar-nav
+        li.nav-item
+          = link_to t('.dashboard'), admin_dashboard_path, class: 'nav-link'
+        li.nav-item
+          = link_to t('.home'), root_path, class: 'nav-link'
         li.nav-item
           - if user_signed_in?
             = link_to "#{t('.sign_out')} (#{current_user.email})", destroy_user_session_path, method: :delete, class: 'nav-link'
