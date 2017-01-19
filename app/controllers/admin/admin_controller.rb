@@ -8,6 +8,7 @@ module Admin
     def dashboard
       @users_count = User.count
       @donations_count = Donation.count
+      @articles_count = Article.count
     end
 
     private
