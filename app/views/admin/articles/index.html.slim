@@ -1,0 +1,15 @@
+table.table
+  thead
+    tr
+      th Title
+      th User
+      th Status
+      th Actions
+  tbody
+    - @articles.each do |article|
+      tr
+        th = article.title
+        th = article.user.full_name
+        th = article.status
+        th
+          = link_to 'Edit', edit_article_path(article)
