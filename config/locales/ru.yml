@@ -66,6 +66,9 @@ ru:
       articles: "Блог"
       sign_out: "Выход"
       sign_in: "Вход"
+    admin:
+      admin_navbar:
+        sign_out: "Выход"
 
   articles:
     index:

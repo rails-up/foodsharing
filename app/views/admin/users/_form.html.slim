@@ -1,0 +1,15 @@
+.container
+  .row
+    .col-md-12
+      = form_for ['admin', @user] do |f|
+        = render 'common/errors', resource: @user
+        .form-group
+          = f.label :name
+          = f.text_field :full_name, class: 'form-control'
+        .form-group
+          - Role.all.each do |role|
+            = check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id)
+            =< role.name
+            br
+        .form-group
+          = f.submit 'Submit', class: 'btn btn-primary'
