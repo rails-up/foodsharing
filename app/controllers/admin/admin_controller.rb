@@ -7,8 +7,10 @@ module Admin
 
     def dashboard
       @users_count = User.count
-      @donations_count = Donation.count
       @articles_count = Article.count
+      @articles_count_today = Article.where("created_at >= ?", Time.zone.now.beginning_of_day).count
+      @donations_count = Donation.count
+      @donations_count_today = Donation.where("created_at >= ?", Time.zone.now.beginning_of_day).count
     end
 
     private
