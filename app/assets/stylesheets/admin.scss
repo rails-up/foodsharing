@@ -1,33 +1,34 @@
 @import "bootstrap";
 
-nav.navbar {
+.navbar {
+  border-bottom: 1px solid #ebeff3;
   height: 60px;
-  padding: 0;
   line-height: 46px;
-  border-bottom: 1px solid #EBEFF3;
+  padding: 0;
 }
 
 .navbar-brand {
   padding-left: 20px;
   padding-top: 6px;
 }
+
 .navbar-light .navbar-brand {
-  color: #F15125;
+  color: #f15125;
 }
 
-.nav.navbar-nav > li.nav-item {
-  border-left: 1px solid #EBEFF3;
+.navbar-nav > li.nav-item {
+  border-left: 1px solid #ebeff3;
+  margin: 0;
   padding-left: 20px;
   padding-right: 20px;
-  margin: 0;
   &:hover {
-    background-color: #EBEFF3;
+    background-color: #ebeff3;
   }
 }
 
-/* min height for main section (for sticky footer) */
+// min height for main section (for sticky footer) */
 
 main {
-  min-height: calc(100vh - 173px);
   margin-top: 60px;
+  min-height: calc(100vh - 173px);
 }

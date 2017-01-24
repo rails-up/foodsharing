@@ -9,10 +9,6 @@ module Admin
     end
 
     def update
-      # @user_role = Role.find(params[:user][:role_ids])
-      # @user.add_role @user_role.name
-      # redirect_to admin_users_path
-      params[:user][:role_ids] ||= []
       if @user.update(user_params)
         redirect_to admin_users_path
       else
@@ -27,6 +23,8 @@ module Admin
     end
 
     def user_params
+      # Check if any roles
+      params[:user][:role_ids] ||= []
       params.require(:user).permit(:full_name, role_ids: [])
     end
   end
