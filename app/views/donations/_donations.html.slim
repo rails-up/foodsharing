@@ -2,4 +2,5 @@ hr
 div.row
   div.col-xs-12
     h5 = link_to donation.title, donation_path(donation)
+    small = donation.created_at.strftime("%d.%m.%Y")
     p = donation.description

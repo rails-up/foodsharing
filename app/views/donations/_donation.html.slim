@@ -4,10 +4,11 @@ div.row
     = link_to t('common.back'), donations_path, class: 'btn btn-outline-primary' 
     
     h5 = donation.title
+    small = donation.created_at.strftime("%d.%m.%Y")
     - if donation.special?
       h6 = t('activerecord.attributes.donation.special') 
     
-    = donation.description
+    p = donation.description
 .row
   .col
     - if user_signed_in?
