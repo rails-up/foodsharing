@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Role.destroy_all
+[:editor, :cafe, :volunteer, :admin].each do |role|
+  Role.create!(name: role)
+end
