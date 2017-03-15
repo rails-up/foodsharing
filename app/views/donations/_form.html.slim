@@ -4,6 +4,11 @@ div.row
 
     = form_for @donation do |f|
       = render 'common/errors', resource: @donation
+      - if current_user.has_role? :cafe
+        div.field-group
+          = f.label :pick_up_date
+          div.field-group
+            = f.datetime_select :pick_up_date, default: {minute: 0}, class: 'form-control'
       div.field-group
         = f.label :title
         = f.text_field :title, class: 'form-control'

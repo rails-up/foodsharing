@@ -9,6 +9,7 @@ ru:
         title: "Заголовок"
         description: "Описание"
         special: "Спецпредложение"
+        pick_up_date: "Когда забрать"
       user:
         email: "Электронная почта"
         password: "Пароль"
