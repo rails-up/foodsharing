@@ -4,4 +4,11 @@ class Donation < ApplicationRecord
   belongs_to :user
   validates :title, :description, :user_id, presence: true
   default_scope { order(created_at: :desc) }
+  before_create :set_special
+
+  private
+
+  def set_special
+    self.special = true if user.has_role? :cafe
+  end
 end

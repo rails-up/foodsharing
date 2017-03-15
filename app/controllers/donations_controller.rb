@@ -53,7 +53,7 @@ class DonationsController < ApplicationController
   end
 
   def donation_params
-    params.require(:donation).permit(:title, :description, :special)
+    params.require(:donation).permit(:title, :description, :special, :pick_up_date)
   end
 
   def authorize_donation
