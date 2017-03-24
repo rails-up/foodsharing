@@ -29,6 +29,7 @@ feature 'Edit Donation', %q(
   given(:cafe_donation) { create :donation, user: cafe }
   given(:volunteer_donation) { create :donation, user: volunteer }
   given(:donation_another_user) { create :donation }
+  given(:admin_donation) { create :donation, user: admin }
 
   describe 'Unauthenticated user' do
     scenario 'can not edit donation' do
@@ -97,10 +98,9 @@ feature 'Edit Donation', %q(
 
   describe 'User with role :cafe' do
     before { sign_in cafe }
-    scenario 'can make a special donation' do
+    scenario 'can edit a special donation' do
       visit donation_path(cafe_donation)
       click_on t_edit
-      check t_special
       click_on t_submit
       expect(page).to have_content t_special
     end
@@ -120,8 +120,8 @@ feature 'Edit Donation', %q(
       expect(page).to_not have_content donation.description
     end
 
-    scenario 'can make a special donation' do
-      visit donation_path(donation)
+    scenario 'can edit special field of own donation' do
+      visit donation_path(admin_donation)
       click_on t_edit
       check t_special
       click_on t_submit

@@ -63,7 +63,6 @@ feature 'Create Donation', %q(
       click_on t_new
       fill_in t_title, with: 'New donation title'
       fill_in t_description, with: 'New donation description'
-      check t_special
       click_on t_submit
       expect(page).to have_content 'New donation title'
       expect(page).to have_content 'New donation description'
