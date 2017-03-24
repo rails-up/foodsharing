@@ -2,6 +2,7 @@
 
 
 @import "bootstrap";
+@import "articles";
 @import "welcome";
 
 .notification {
@@ -15,4 +16,12 @@
   z-index: 100;
   top: 60px;
   right: 17px;
+}
+
+main {
+  margin: 6em 0 3em 0;
+}
+
+.separator {
+  margin: 1.5em 0;
 }
