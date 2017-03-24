@@ -4,11 +4,11 @@ div.row
 
     = form_for @donation do |f|
       = render 'common/errors', resource: @donation
-      - if current_user.has_role? :cafe
+      - if current_user.can_specialize?(Donation, action_name)
         div.field-group
           = f.label :pick_up_date
           div.field-group
-            = f.datetime_select :pick_up_date, default: {minute: 0}, class: 'form-control'
+            = f.datetime_select :pick_up_date, include_blank: true, class: 'form-control'
       div.field-group
         = f.label :title
         = f.text_field :title, class: 'form-control'
@@ -16,7 +16,7 @@ div.row
         = f.label :description
         = f.text_area :description, class: 'form-control'
 
-      - if current_user.can_specialize?(Donation, action_name)
+      - if current_user.has_role?(:admin) && (action_name == 'new' || @donation.user == current_user)
         div.field-group
           = f.label :special
           = f.check_box :special, class: 'form-control'
