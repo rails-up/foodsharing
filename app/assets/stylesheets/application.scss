@@ -1,13 +1,15 @@
 // = require_self
 
 
+@import "common";
 @import "bootstrap";
+@import "articles";
 @import "welcome";
 
 .notification {
-  background-color: #F5F5F8;
+  background-color: $notification-background-color;
   position: absolute;
-  border: #69696A solid 1px;
+  border: $notification-border-color solid 1px;
   border-radius: 3px;
   width: auto;
   height: auto;
@@ -15,4 +17,12 @@
   z-index: 100;
   top: 60px;
   right: 17px;
+}
+
+main {
+  margin: 6em 0 3em;
+}
+
+.separator {
+  margin: 1.5em 0;
 }
