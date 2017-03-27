@@ -2,8 +2,8 @@ nav.navbar {
   height: 60px;
   padding: 0;
   line-height: 46px;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EBEFF3;
+  background-color: $navbar-background-color;
+  border-bottom: 1px solid $navbar-border-bottom-color;
 }
 
 .navbar-brand {
@@ -11,16 +11,16 @@ nav.navbar {
   padding-top: 6px;
 }
 .navbar-light .navbar-brand {
-  color: #F15125;
+  color: $navbar-brand-color;
 }
 
 .nav.navbar-nav > li.nav-item {
-  border-left: 1px solid #EBEFF3;
+  border-left: 1px solid $navbar-navitem-color;
   padding-left: 20px;
   padding-right: 20px;
   margin: 0;
   &:hover {
-    background-color: #EBEFF3;
+    background-color: $navbar-navitem-color;
   }
 }
 
@@ -72,6 +72,6 @@ main {
 footer {
   padding-top: 30px;
   padding-bottom: 20px;
-  background-color: #333333;
-  color: #fff;
+  background-color: $footer-background-color;
+  color: $footer-color;
 }

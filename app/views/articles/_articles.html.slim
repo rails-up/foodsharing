@@ -1,7 +1,7 @@
 div.content
   div.row
     div.col-xs-12
-      .articles_date= l article.created_at, format: :medium
+      .articles-date= l article.created_at, format: :medium
       h5 = link_to article.title, article_path(article)
       p = article.content.html_safe.truncate_words(40)
       .read_more= link_to "Читать далее...", article_path(article), class: "btn btn-outline-primary btn-sm"

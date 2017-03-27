@@ -1,13 +1,13 @@
 div.container
   div.row  
     div.col-xs-12
-      = link_to "\u27FB  " + t('.back'), articles_path, class: 'articles_back'
+      = link_to "\u27FB  " + t('.back'), articles_path, class: 'articles-back'
       - if user_signed_in?
         =< link_to t('common.edit'), edit_article_path(article), class: 'btn btn-outline-primary btn-sm' if current_user.can_update?(article)
         =< link_to t('common.destroy'), article_path(article), method: :delete, data: {confirm: t('common.confirm')}, class: 'btn btn-outline-primary btn-sm' if current_user.can_delete?(article)
 
-      h5.article_title = article.title
-      .article_date
+      h5.article-title = article.title
+      .article-date
         = l article.created_at, format: :long
         |  (
         = time_ago_in_words(article.created_at)
