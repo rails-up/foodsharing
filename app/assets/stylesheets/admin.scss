@@ -1,7 +1,12 @@
-@import "bootstrap";
+$admin-navbar-border-bottom: #ebeff3;
+$admin-navbar-brand: #f15125;
+$admin-navbar-nav-item: #ebeff3;
+$admin-navbar-nav-item-hover: #ebeff3;
+
+@import 'bootstrap';
 
 .navbar {
-  border-bottom: 1px solid #ebeff3;
+  border-bottom: 1px solid $admin-navbar-border-bottom;
   height: 60px;
   line-height: 46px;
   padding: 0;
@@ -13,20 +18,21 @@
 }
 
 .navbar-light .navbar-brand {
-  color: #f15125;
+  color: $admin-navbar-brand;
 }
 
 .navbar-nav > li.nav-item {
-  border-left: 1px solid #ebeff3;
+  border-left: 1px solid $admin-navbar-nav-item;
   margin: 0;
   padding-left: 20px;
   padding-right: 20px;
+
   &:hover {
-    background-color: #ebeff3;
+    background-color: $admin-navbar-nav-item-hover;
   }
 }
 
-// min height for main section (for sticky footer) */
+// min height for main section (for sticky footer)
 
 main {
   margin-top: 60px;

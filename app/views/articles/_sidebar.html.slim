@@ -1,12 +1,6 @@
-h5 Sidebar
-
 - if user_signed_in?
-  = link_to t('.all_articles'), articles_path, class: "btn btn-outline-primary #{ 'disabled' if params[:my_articles].nil? && params[:action] == 'index' }" if current_user.can_create?(Article)
+  = link_to t('.all_articles'), articles_path, class: "btn btn-outline-primary btn-sidebar #{ 'disabled' if params[:my_articles].nil? && params[:action] == 'index' }" if current_user.can_create?(Article)
   h5 = t('.my_articles')
   = link_to_my_articles(:published) if current_user.can_create?(Article)
-  br
-  br
   = link_to_my_articles(:draft) if current_user.can_create?(Article)
-  br
-  br
-  = link_to t('.new'), new_article_path, class: 'btn btn-primary' if current_user.can_create?(Article)
+  = link_to t('.new'), new_article_path, class: 'btn btn-primary btn-sidebar' if current_user.can_create?(Article)
