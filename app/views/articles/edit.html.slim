@@ -1,6 +1,7 @@
 div.row
-  div.col-md-8.col-xs-12 
-    h3 = t('.title')
+  div.col-md-8.col-xs-12
+    = link_to "\u27FB  " + t('articles.back'), articles_path, class: 'articles-back'
+    h3.article-title = t('.title')
     == render 'form'
   div.col-md-4.col-xs-12
     = render partial: 'sidebar'

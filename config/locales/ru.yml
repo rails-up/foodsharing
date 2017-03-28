@@ -71,6 +71,11 @@ ru:
         sign_out: "Выход"
 
   articles:
+    back: "назад к статьям"
+    article:
+      ago: "назад"
+    articles:
+      read_more: "Читать далее..."
     index:
     sidebar:
       new: "Новая статья"

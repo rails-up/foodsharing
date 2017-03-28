@@ -1,0 +1,78 @@
+nav.navbar {
+  background-color: $navbar-background-color;
+  border-bottom: 1px solid $navbar-border-bottom-color;
+  height: 60px;
+  line-height: 46px;
+  padding: 0;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  padding-top: 6px;
+}
+.navbar-light .navbar-brand {
+  color: $navbar-brand-color;
+}
+
+.nav.navbar-nav > li.nav-item {
+  border-left: 1px solid $navbar-navitem-color;
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  &:hover {
+    background-color: $navbar-navitem-color;
+  }
+}
+
+// WELCOME page - video-section with jumbotron
+.cover-image {
+  background-image: image-url('banner.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 93vh;
+  overflow: hidden;
+  padding-top: 0px;
+}
+
+.video-section {
+  background-color: rgba(71, 71, 71, 0.59);
+}
+
+.video-section .buttonBar{display: none;}
+.player {font-size: 1px;}
+
+.jumbotron {
+  color: #fff;
+  background-color: rgba(71, 71, 71, 0.4);
+  margin-top: (100vh / 6);
+  border-radius: 0;
+  h1 {
+    font-size: 100px;
+  }
+}
+
+.icon-block {
+  i {
+    font-size: 70px;
+  }
+}
+.features {
+  padding-top: 30px;
+}
+
+// min height for main section (for sticky footer)
+
+main {
+  margin-top: 60px;
+  min-height: calc(100vh - 173px);
+}
+
+// FOOTER
+
+footer {
+  background-color: $footer-background-color;
+  color: $footer-color;
+  padding-bottom: 20px;
+  padding-top: 30px;
+}

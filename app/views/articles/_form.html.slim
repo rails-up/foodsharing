@@ -11,7 +11,6 @@ div.container
           = f.text_field :title, class: 'form-control'
         div.form-group
           = f.label :content
-          = f.text_area :content, class: 'form-control'
+          = f.text_area :content, class: 'form-control', rows: '15'
         div.form-group
           = f.submit t('.submit', action: @article.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'
-          = link_to t('common.back'), articles_path, class: 'btn btn-outline-primary'
