@@ -13,4 +13,4 @@ div.container
         = time_ago_in_words(article.created_at)
         =<t('.ago')
         |)
-      .article-content= article.content
+      .article-content= article.content.html_safe

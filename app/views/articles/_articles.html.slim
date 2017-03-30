@@ -3,6 +3,6 @@ div.content
     div.col-xs-12
       .articles-date= l article.created_at, format: :medium
       h5 = link_to article.title, article_path(article)
-      p = article.content.html_safe.truncate_words(40)
+      p = article.content.truncate_words(40).html_safe
       .read-more= link_to t('.read_more'), article_path(article), class: "btn btn-outline-primary btn-sm"
 hr.separator
