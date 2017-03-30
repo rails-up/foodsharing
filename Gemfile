@@ -36,6 +36,9 @@ gem 'omniauth-vkontakte'
 gem 'authority'
 gem 'rolify'
 
+# WYSIWYG editor
+gem 'summernote-rails'
+
 # styling
 gem 'bootstrap', '~> 4.0.0.alpha5'
 source 'https://rails-assets.org' do

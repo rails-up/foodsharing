@@ -30,3 +30,16 @@
 .article-title {
   text-align: center;
 }
+
+.note-toolbar {
+  background-color: $summernote-background-color;
+}
+
+.note-btn {
+  background-color: $summernote-btn-color;
+  border-color: $summernote-border-color;
+
+  &:hover {
+    background-color: $summernote-background-color;
+  }
+}

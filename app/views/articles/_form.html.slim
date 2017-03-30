@@ -11,6 +11,6 @@ div.container
           = f.text_field :title, class: 'form-control'
         div.form-group
           = f.label :content
-          = f.text_area :content, class: 'form-control', rows: '15'
+          = f.text_area :content, class: 'form-control', rows: '15', 'data-provider' => 'summernote'
         div.form-group
           = f.submit t('.submit', action: @article.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'
