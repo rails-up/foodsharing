@@ -11,11 +11,13 @@ FactoryGirl.define do
     title
     description
     user
+    place
   end
 
   factory :invalid_donation, class: 'Donation' do
     title nil
     description nil
     user nil
+    place nil
   end
 end

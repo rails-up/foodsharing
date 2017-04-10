@@ -1,0 +1,1 @@
+json.array! @stations.sort_by { |a| a.name }, :id, :name, :line

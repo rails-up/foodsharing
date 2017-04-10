@@ -1,25 +1,36 @@
-div.row
-  div.col-xs-12
+.row
+  .col-sm-8.offset-sm-2
     = link_to t('common.back'), donations_path, class: 'btn btn-outline-primary' 
 
     = form_for @donation do |f|
       = render 'common/errors', resource: @donation
       - if current_user.can_specialize?(Donation, action_name)
-        div.field-group
+        .form-group
           = f.label :pick_up_date
-          div.field-group
+          .form-group
             = f.datetime_select :pick_up_date, include_blank: true, class: 'form-control'
-      div.field-group
+      .form-group
         = f.label :title
         = f.text_field :title, class: 'form-control'
-      div.field-group
+      .form-group
         = f.label :description
         = f.text_area :description, class: 'form-control'
 
+      .form-group
+        = t('.place')
+        .place
+          -unless @donation.new_record?
+            strong= t('.your_place')
+            =< current_place
+        = select_tag 'city', options_from_collection_for_select(City.all, 'id', 'name'), class: 'city-select form-control', prompt: t('.choose_city')
+
+      .form-group
+        = select_tag 'donation[place_id]', {}, class: 'form-control'
+
       - if current_user.has_role?(:admin) && (action_name == 'new' || @donation.user == current_user)
-        div.field-group
+        .form-group
           = f.label :special
           = f.check_box :special, class: 'form-control'
 
-      div.field-group
-          = f.submit t('.submit', action: @donation.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'
+      .form-group
+        = f.submit t('.submit', action: @donation.new_record? ? t('common.create') : t('common.update')), class: 'btn btn-primary'
