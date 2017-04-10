@@ -19,7 +19,7 @@
       .form-group
         = t('.place')
         .place
-          -unless @donation.new_record?
+          -unless @donation.new_record? || @donation.place == nil
             strong= t('.your_place')
             =< current_place
         = select_tag 'city', options_from_collection_for_select(City.all, 'id', 'name'), class: 'city-select form-control', prompt: t('.choose_city')

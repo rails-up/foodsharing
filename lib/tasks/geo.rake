@@ -4,7 +4,7 @@ namespace :geo do
     require 'net/http'
     require 'json'
     s_name, s_lat, s_lng, l_name = ''
-    city = City.find_by_name('Москва').id
+    city = City.find_or_create_by(name: 'Москва')
 
     puts 'Getting Moscow data from metro API...'
     uri = URI('https://api.hh.ru/metro/1')
@@ -17,7 +17,8 @@ namespace :geo do
         s_name = station['name']
         s_lat =  station['lat']
         s_lng =  station['lng']
-        Place.find_or_create_by!(name: s_name, lat: s_lat, lng: s_lng, line: l_name, city_id: city)
+        Place.find_or_create_by!(name: s_name, lat: s_lat, lng: s_lng,
+                                 line: l_name, city_id: city.id)
       end
     end
     puts 'Done'
@@ -28,7 +29,7 @@ namespace :geo do
     require 'net/http'
     require 'json'
     s_name, s_lat, s_lng, l_name = ''
-    city = City.find_by_name('Санкт-Петербург').id
+    city = City.find_or_create_by(name: 'Санкт-Петербург')
 
     puts 'Getting SP data from metro API...'
     uri = URI('https://api.hh.ru/metro/2')
@@ -41,7 +42,8 @@ namespace :geo do
         s_name = station['name']
         s_lat =  station['lat']
         s_lng =  station['lng']
-        Place.find_or_create_by!(name: s_name, lat: s_lat, lng: s_lng, line: l_name, city_id: city)
+        Place.find_or_create_by!(name: s_name, lat: s_lat, lng: s_lng,
+                                 line: l_name, city_id: city.id)
       end
     end
     puts 'Done'
