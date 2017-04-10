@@ -7,11 +7,12 @@ RSpec.describe DonationsController, type: :controller do
   let(:volunteer) { create :user, role: :volunteer }
   let(:admin) { create :user, role: :admin }
   let(:another_user) { create :user }
+  let(:place) { create :place }
 
-  let(:donation) { create :donation, user: user }
-  let(:cafe_donation) { create :donation, user: cafe, special: true }
-  let(:volunteer_donation) { create :donation, user: volunteer }
-  let(:donation_another_user) { create :donation }
+  let(:donation) { create :donation, user: user, place: place }
+  let(:cafe_donation) { create :donation, user: cafe, special: true, place: place }
+  let(:volunteer_donation) { create :donation, user: volunteer, place: place }
+  let(:donation_another_user) { create :donation, place: place }
 
   describe 'GET #index' do
     let(:donations) { create_list(:donation, 2) }
@@ -260,13 +261,13 @@ RSpec.describe DonationsController, type: :controller do
 
   describe 'POST #create' do
     let(:subject) do
-      post :create, params: { donation: attributes_for(:donation) }
+      post :create, params: { donation: attributes_for(:donation).merge(place_id: place.id) }
     end
     let(:special_subject) do
-      post :create, params: { donation: attributes_for(:donation).merge(special: true) }
+      post :create, params: { donation: attributes_for(:donation).merge(special: true, place_id: place.id) }
     end
     let(:invalid_subject) do
-      post :create, params: { donation: attributes_for(:invalid_donation) }
+      post :create, params: { donation: attributes_for(:invalid_donation).merge(place_id: place.id) }
     end
 
     context 'when user unauthenticated' do
