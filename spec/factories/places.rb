@@ -6,4 +6,12 @@ FactoryGirl.define do
     lng 12.5111
     city
   end
+
+  factory :invalid_place, class: 'Place' do
+    name nil
+    address nil
+    lat nil
+    lng nil
+    city nil
+  end
 end

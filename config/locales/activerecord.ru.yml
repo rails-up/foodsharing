@@ -49,3 +49,7 @@ ru:
           attributes:
             place:
               required: "- не должно быть пустым"
+        place:
+          attributes:
+            city:
+              required: "- поле не должно быть пустым"
