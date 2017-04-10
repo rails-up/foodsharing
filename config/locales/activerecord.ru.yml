@@ -4,12 +4,14 @@ ru:
       donation: "Предложение"
       user: "Пользователь"
       article: "Статья"
+      place: "Местоположение"
     attributes:
       donation:
         title: "Заголовок"
         description: "Описание"
         special: "Спецпредложение"
         pick_up_date: "Когда забрать"
+        place: "Местоположение"
       user:
         email: "Электронная почта"
         password: "Пароль"
@@ -24,6 +26,9 @@ ru:
         name: "Название"
         phone: "Телефонный номер"
         address: "Почтовый адрес"
+      place:
+        name: "Название"
+        line: "Линия"
     errors:
       messages:
         blank: "- поле не должно быть пустым"
@@ -40,3 +45,7 @@ ru:
               taken: "- пользователь с таким email уже зарегистрирован"
             full_name:
               blank: "- имя не может быть пустым"
+        donation:
+          attributes:
+            place:
+              required: "- не должно быть пустым"

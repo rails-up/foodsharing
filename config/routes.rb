@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :donations
   resources :companies, except: [:index, :show]
 
+  get '/places/:place_id/metro' => 'places#metro', as: 'place_metro'
+
   #Admin
   namespace :admin do
     get "/", to: "admin#dashboard", as: "dashboard"
